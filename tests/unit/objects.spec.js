@@ -150,7 +150,7 @@ const getTestCases = [
 ];
 
 describe.each(getTestCases)(
-    "Test Arr.Get",
+    "Get value by key",
     ({ description, arr, key, defaultValue, expectedValue }) => {
         it(description, () => {
             expect(new Obj(arr).getByKey(key, defaultValue)).toEqual(

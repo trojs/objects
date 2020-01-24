@@ -20,7 +20,7 @@ or
 
 Example usage:
 ```
-new Obj({
+const flatter = new Obj({
     a: 1,
     b: 2,
     c: [3, 4],
@@ -29,8 +29,10 @@ new Obj({
 })
 ```
 
-The response:
+You can get the flat object by:
 ```
+flatter.flat
+
 {
     a: 1,
     b: 2,
@@ -40,6 +42,56 @@ The response:
     "d.f": 6,
     "g.h.i": 7
 }
+```
+
+You can get the object entries by:
+```
+flatter.entries()
+
+[
+    ["a", 1],
+    ["b", 2],
+    ["c.0", 3],
+    ["c.1", 4],
+    ["d.e", 5],
+    ["d.f", 6],
+    ["g.h.i", 7]
+]
+```
+
+You can get the object keys by:
+```
+flatter.keys()
+
+["a", "b", "c.0", "c.1", "d.e", "d.f", "g.h.i"]
+```
+
+You can get the object values by:
+```
+flatter.values()
+
+[1, 2, 3, 4, 5, 6, 7]
+```
+
+You can get the object length by:
+```
+flatter.length
+
+7
+```
+
+You can get by key by:
+```
+flatter.getByKey("g.h.i")
+
+7
+```
+
+Or set a fallback value by:
+```
+flatter.getByKey("x.y.z", 42)
+
+42
 ```
 
 [npm-url]: https://github.com/hckrnews/objects
