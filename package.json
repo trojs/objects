@@ -1,0 +1,44 @@
+{
+    "name": "@hckrnews/objects",
+    "description": "Hack JavaScript objects",
+    "version": "0.1.0",
+    "author": {
+        "name": "Pieter Wigboldus",
+        "url": "https://hckr.news/"
+    },
+    "license": "AGPL-3.0",
+    "scripts": {
+        "test": "jest",
+        "lint": "eslint .",
+        "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+        "cpd": "node_modules/jscpd/bin/jscpd src"
+    },
+    "main": "src/objects.js",
+    "files": [
+        "src/objects.js"
+    ],
+    "devDependencies": {
+        "@babel/preset-env": "^7.8.3",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-eslint": "^10.0.3",
+        "codecov": "^3.6.1",
+        "coveralls": "^3.0.7",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "jest": "^25.1.0",
+        "jscpd": "^2.0.16",
+        "prettier": "1.19.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hckrnews/objects"
+    },
+    "engines": {
+        "node": ">=10"
+    },
+    "keywords": [
+        "objects",
+        "flat"
+    ]
+}
