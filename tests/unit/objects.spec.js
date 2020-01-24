@@ -125,32 +125,37 @@ describe("Test objects.js methods", () => {
 
 const getTestCases = [
     {
-        description: 'Key is missing, no defaultValue provided',
+        description: "Key is missing, no defaultValue provided",
         arr: {},
-        key: 'pizza',
-        expectedValue: undefined,
+        key: "pizza",
+        expectedValue: undefined
     },
     {
-        description: 'Key is missing, a defaultValue is provided',
+        description: "Key is missing, a defaultValue is provided",
         arr: {},
-        key: 'pizza',
-        defaultValue: 'margherita',
-        expectedValue: 'margherita',
+        key: "pizza",
+        defaultValue: "margherita",
+        expectedValue: "margherita"
     },
     {
-        description: 'Nested key',
+        description: "Nested key",
         arr: {
-            turtles: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
-            food: ['Pizza'],
-            mice: ['Splinter'],
+            turtles: ["Donatello", "Michelangelo", "Raphael", "Leonardo"],
+            food: ["Pizza"],
+            mice: ["Splinter"]
         },
-        key: 'turtles.0',
-        expectedValue: 'Donatello',
-    },
+        key: "turtles.0",
+        expectedValue: "Donatello"
+    }
 ];
 
-describe.each(getTestCases)('Test Arr.Get', ({ description, arr, key, defaultValue, expectedValue }) => {
-    it(description, () => {
-        expect(new Obj(arr).getByKey(key, defaultValue)).toEqual(expectedValue);
-    });
-});
+describe.each(getTestCases)(
+    "Test Arr.Get",
+    ({ description, arr, key, defaultValue, expectedValue }) => {
+        it(description, () => {
+            expect(new Obj(arr).getByKey(key, defaultValue)).toEqual(
+                expectedValue
+            );
+        });
+    }
+);
