@@ -94,8 +94,8 @@ flatter.getByKey("x.y.z", 42)
 42
 ```
 
-[npm-url]: https://github.com/hckrnews/objects
-[npm-image]: https://img.shields.io/npm/v/objects.svg
+[npm-url]: https://www.npmjs.com/package/@hckrnews/objects
+[npm-image]: https://img.shields.io/npm/v/@hckrnews/objects.svg
 [travis-url]: https://travis-ci.org/hckrnews/objects
 [travis-image]: https://img.shields.io/travis/hckrnews/objects/master.svg
 [coveralls-url]: https://coveralls.io/r/hckrnews/objects
