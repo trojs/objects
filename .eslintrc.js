@@ -9,8 +9,15 @@ module.exports = {
     rules: {
         "no-console": "warn",
         "no-cond-assign": "error",
+        "no-dupe-args": "error",
+        "no-dupe-else-if": "error",
+        "no-dupe-keys": "error",
+        "no-duplicate-case": "error",
+        "no-lonely-if": "error",
         "no-param-reassign": "error",
         "no-return-assign": "error",
+        "no-unreachable": "error",
+        "valid-typeof": "error",
         "no-useless-escape": "error",
         "vars-on-top": "error",
         camelcase: [
@@ -51,6 +58,15 @@ module.exports = {
         "one-var": ["error", "never"],
         "operator-assignment": ["error", "always"],
         "spaced-comment": ["error", "always"],
+
+        "constructor-super": ["warn"],
+        "no-class-assign": ["warn"],
+        "no-const-assign": ["warn"],
+        "no-dupe-class-members": ["warn"],
+        "no-new-symbol": ["warn"],
+        "no-this-before-super": ["warn"],
+        "require-yield": ["warn"],
+
         "require-jsdoc": [
             "error",
             {
