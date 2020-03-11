@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Hack JavaScript objects",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -20,7 +20,7 @@
     "devDependencies": {
         "@babel/core": "^7.8.4",
         "@babel/preset-env": "^7.8.7",
-        "@hckrnews/eslint-config": "^0.1.0",
+        "@hckrnews/eslint-config": "^0.1.1",
         "babel-eslint": "^10.1.0",
         "codecov": "^3.6.5",
         "coveralls": "^3.0.7",

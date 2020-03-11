@@ -831,10 +831,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@hckrnews/eslint-config@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@hckrnews/eslint-config/-/eslint-config-0.1.0.tgz#9c6da58de3645f58d3b518da23ca4a440f525f34"
-  integrity sha512-Y3SqIm7GeKghKYX3oQ8Afm1woCzBA91Sb0FHpPF/6GqaSNA1k+FzKZTV+XzMpWYaS8xgo7XtaRv/fK6pizx66A==
+"@hckrnews/eslint-config@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@hckrnews/eslint-config/-/eslint-config-0.1.1.tgz#598c8fe7c1bddb45bcae6492c03e696457ecce02"
+  integrity sha512-sBdk4yAOsR7nB/V1aVcJ1UnNxSVCblfDCMEuVR+gYkVLuXVEu4KBLFgTKpBvHmpmJzgHMKQEifmthqbyk6/q8g==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
