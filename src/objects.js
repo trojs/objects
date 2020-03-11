@@ -18,6 +18,7 @@ module.exports = class Obj {
 
         return this;
     }
+
     /**
      * flatten the object 1 level per time.
      */
@@ -27,11 +28,11 @@ module.exports = class Obj {
                 let index = originalRowIndex;
 
                 if (this.prefix) {
-                    index = [this.prefix, originalRowIndex].join(".");
+                    index = [this.prefix, originalRowIndex].join('.');
                 }
 
-                if (typeof originalRow == "object") {
-                    let childRows = new Obj(originalRow, index).flat;
+                if (typeof originalRow === 'object') {
+                    const childRows = new Obj(originalRow, index).flat;
 
                     this.flatObject = Object.assign(this.flatObject, childRows);
 
@@ -97,7 +98,7 @@ module.exports = class Obj {
      * @return {object|null}
      */
     getByKey(key, defaultValue) {
-        if (!this.flatObject.hasOwnProperty(key)) {
+        if (!Object.prototype.hasOwnProperty.call(this.flatObject, key)) {
             return defaultValue;
         }
 

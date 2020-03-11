@@ -1,59 +1,59 @@
-import Obj from "../../src/objects.js";
+import Obj from '../../src/objects';
 
 const TestCases = [
     {
-        description: "Simple object",
+        description: 'Simple object',
         input: {
             a: 1,
-            b: 2
+            b: 2,
         },
         expectedResult: {
             a: 1,
-            b: 2
-        }
+            b: 2,
+        },
     },
     {
-        description: "2 level objects",
+        description: '2 level objects',
         input: {
             a: {
-                x: "test 1",
-                y: "test 2"
+                x: 'test 1',
+                y: 'test 2',
             },
             b: {
-                x: "test 3",
-                y: "test 4"
-            }
+                x: 'test 3',
+                y: 'test 4',
+            },
         },
         expectedResult: {
-            "a.x": "test 1",
-            "a.y": "test 2",
-            "b.x": "test 3",
-            "b.y": "test 4"
-        }
+            'a.x': 'test 1',
+            'a.y': 'test 2',
+            'b.x': 'test 3',
+            'b.y': 'test 4',
+        },
     },
     {
-        description: "Complext object with multiple levels",
+        description: 'Complext object with multiple levels',
         input: {
             a: 1,
             b: 2,
             c: [3, 4],
             d: { e: 5, f: 6 },
-            g: { h: { i: 7 } }
+            g: { h: { i: 7 } },
         },
         expectedResult: {
             a: 1,
             b: 2,
-            "c.0": 3,
-            "c.1": 4,
-            "d.e": 5,
-            "d.f": 6,
-            "g.h.i": 7
-        }
-    }
+            'c.0': 3,
+            'c.1': 4,
+            'd.e': 5,
+            'd.f': 6,
+            'g.h.i': 7,
+        },
+    },
 ];
 
 describe.each(TestCases)(
-    "Test objects.js",
+    'Test objects.js',
     ({ description, input, expectedResult }) => {
         it(description, () => {
             expect(new Obj(input).flat).toMatchObject(expectedResult);
@@ -61,61 +61,61 @@ describe.each(TestCases)(
     }
 );
 
-describe("Test objects.js methods", () => {
-    it("Get the entries", () => {
+describe('Test objects.js methods', () => {
+    it('Get the entries', () => {
         const input = {
             a: 1,
             b: 2,
             c: [3, 4],
             d: { e: 5, f: 6 },
-            g: { h: { i: 7 } }
+            g: { h: { i: 7 } },
         };
         const expectedResult = [
-            ["a", 1],
-            ["b", 2],
-            ["c.0", 3],
-            ["c.1", 4],
-            ["d.e", 5],
-            ["d.f", 6],
-            ["g.h.i", 7]
+            ['a', 1],
+            ['b', 2],
+            ['c.0', 3],
+            ['c.1', 4],
+            ['d.e', 5],
+            ['d.f', 6],
+            ['g.h.i', 7],
         ];
 
         expect(new Obj(input).entries()).toMatchObject(expectedResult);
     });
 
-    it("Get the keys", () => {
+    it('Get the keys', () => {
         const input = {
             a: 1,
             b: 2,
             c: [3, 4],
             d: { e: 5, f: 6 },
-            g: { h: { i: 7 } }
+            g: { h: { i: 7 } },
         };
-        const expectedResult = ["a", "b", "c.0", "c.1", "d.e", "d.f", "g.h.i"];
+        const expectedResult = ['a', 'b', 'c.0', 'c.1', 'd.e', 'd.f', 'g.h.i'];
 
         expect(new Obj(input).keys()).toMatchObject(expectedResult);
     });
 
-    it("Get the values", () => {
+    it('Get the values', () => {
         const input = {
             a: 1,
             b: 2,
             c: [3, 4],
             d: { e: 5, f: 6 },
-            g: { h: { i: 7 } }
+            g: { h: { i: 7 } },
         };
         const expectedResult = [1, 2, 3, 4, 5, 6, 7];
 
         expect(new Obj(input).values()).toMatchObject(expectedResult);
     });
 
-    it("Get the length", () => {
+    it('Get the length', () => {
         const input = {
             a: 1,
             b: 2,
             c: [3, 4],
             d: { e: 5, f: 6 },
-            g: { h: { i: 7 } }
+            g: { h: { i: 7 } },
         };
         const expectedResult = 7;
 
@@ -125,32 +125,32 @@ describe("Test objects.js methods", () => {
 
 const getTestCases = [
     {
-        description: "Key is missing, no defaultValue provided",
+        description: 'Key is missing, no defaultValue provided',
         arr: {},
-        key: "pizza",
-        expectedValue: undefined
+        key: 'pizza',
+        expectedValue: undefined,
     },
     {
-        description: "Key is missing, a defaultValue is provided",
+        description: 'Key is missing, a defaultValue is provided',
         arr: {},
-        key: "pizza",
-        defaultValue: "margherita",
-        expectedValue: "margherita"
+        key: 'pizza',
+        defaultValue: 'margherita',
+        expectedValue: 'margherita',
     },
     {
-        description: "Nested key",
+        description: 'Nested key',
         arr: {
-            turtles: ["Donatello", "Michelangelo", "Raphael", "Leonardo"],
-            food: ["Pizza"],
-            mice: ["Splinter"]
+            turtles: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
+            food: ['Pizza'],
+            mice: ['Splinter'],
         },
-        key: "turtles.0",
-        expectedValue: "Donatello"
-    }
+        key: 'turtles.0',
+        expectedValue: 'Donatello',
+    },
 ];
 
 describe.each(getTestCases)(
-    "Get value by key",
+    'Get value by key',
     ({ description, arr, key, defaultValue, expectedValue }) => {
         it(description, () => {
             expect(new Obj(arr).getByKey(key, defaultValue)).toEqual(

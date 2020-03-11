@@ -1,22 +1,22 @@
 module.exports = {
-    moduleFileExtensions: ["js", "jsx", "json"],
+    moduleFileExtensions: ['js', 'jsx', 'json'],
 
     transform: {
-        "^.+\\.js?$": "babel-jest"
+        '^.+\\.js?$': 'babel-jest',
     },
 
-    transformIgnorePatterns: ["/node_modules/"],
+    transformIgnorePatterns: ['/node_modules/'],
 
     moduleNameMapper: {
-        "^@/(.*)$": "<rootDir>/src/$1"
+        '^@/(.*)$': '<rootDir>/src/$1',
     },
 
     testMatch: [
-        "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+        '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
     ],
 
-    testURL: "http://localhost/",
+    testURL: 'http://localhost/',
 
     collectCoverage: true,
-    collectCoverageFrom: ["src/**/*.js"]
+    collectCoverageFrom: ['src/**/*.js'],
 };
