@@ -159,3 +159,41 @@ describe.each(getTestCases)(
         });
     }
 );
+
+const hasTestCases = [
+    {
+        description: 'Check a key that doesnt exists',
+        arr: {},
+        key: 'pizza',
+        expectedValue: false,
+    },
+    {
+        description: 'Simple key check',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        key: 'turtle',
+        expectedValue: true,
+    },
+    {
+        description: 'Nested key check',
+        arr: {
+            turtles: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
+            food: ['Pizza'],
+            mice: ['Splinter'],
+        },
+        key: 'turtles.0',
+        expectedValue: true,
+    },
+];
+
+describe.each(hasTestCases)(
+    'Check if the object has a key',
+    ({ description, arr, key, expectedValue }) => {
+        it(description, () => {
+            expect(new Obj(arr).has(key)).toEqual(expectedValue);
+        });
+    }
+);

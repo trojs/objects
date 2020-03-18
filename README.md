@@ -94,6 +94,13 @@ flatter.getByKey("x.y.z", 42)
 42
 ```
 
+Check if the object has a key:
+```
+flatter.has("g.h.i")
+
+true
+```
+
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects
 [npm-image]: https://img.shields.io/npm/v/@hckrnews/objects.svg
 [travis-url]: https://travis-ci.org/hckrnews/objects
