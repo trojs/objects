@@ -98,10 +98,21 @@ module.exports = class Obj {
      * @return {object|null}
      */
     getByKey(key, defaultValue) {
-        if (!Object.prototype.hasOwnProperty.call(this.flatObject, key)) {
+        if (!this.has(key)) {
             return defaultValue;
         }
 
         return this.flatObject[key];
+    }
+
+    /**
+     * Check if the object has a key.
+     *
+     * @param {string} key
+     *
+     * @return {boolean}
+     */
+    has(key) {
+        return Object.prototype.hasOwnProperty.call(this.flatObject, key);
     }
 };
