@@ -193,9 +193,7 @@ describe.each(hasTestCases)(
     'Check if the object has a key',
     ({ description, arr, key, expectedValue }) => {
         it(description, () => {
-            expect(new Obj(arr).has(key)).toEqual(
-                expectedValue
-            );
+            expect(new Obj(arr).has(key)).toEqual(expectedValue);
         });
     }
 );
