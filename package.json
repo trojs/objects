@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Hack JavaScript objects",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"

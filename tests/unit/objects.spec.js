@@ -163,7 +163,7 @@ const getTestCases = [
         },
     },
     {
-        description: 'Nested key',
+        description: 'Nested sub keys',
         arr: {
             a: 1,
             b: 2,
@@ -172,7 +172,19 @@ const getTestCases = [
             g: { h: { i: 7 } },
         },
         key: 'd',
-        defaultValue: 'nope',
+        expectedValue: { e: 5, f: 6 },
+    },
+    {
+        description: 'Nested key from flat object',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            'd.e': 5,
+            'd.f': 6,
+            'g.h.i': 7,
+        },
+        key: 'd',
         expectedValue: { e: 5, f: 6 },
     },
 ];
