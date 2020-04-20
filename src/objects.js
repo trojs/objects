@@ -98,11 +98,21 @@ module.exports = class Obj {
      * @return {object|null}
      */
     getByKey(key, defaultValue) {
-        if (!this.has(key)) {
-            return defaultValue;
+        if (this.has(key)) {
+            return this.flatObject[key];
         }
 
-        return this.flatObject[key];
+        if (this.includes(key)) {
+            return this.entries()
+                .filter(([currentKey]) => currentKey.startsWith(key))
+                .reduce((accumulator, [currentKey, currentValue]) => {
+                    const subKey = currentKey.substring(key.length + 1);
+                    accumulator[subKey] = currentValue;
+                    return accumulator;
+                }, {});
+        }
+
+        return defaultValue;
     }
 
     /**
@@ -114,5 +124,16 @@ module.exports = class Obj {
      */
     has(key) {
         return Object.prototype.hasOwnProperty.call(this.flatObject, key);
+    }
+
+    /**
+     * Check if the object has a key that includes.
+     *
+     * @param {string} key
+     *
+     * @return {boolean}
+     */
+    includes(key) {
+        return this.keys().filter(item => item.startsWith(key)).length > 0;
     }
 };

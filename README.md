@@ -94,9 +94,22 @@ flatter.getByKey("x.y.z", 42)
 42
 ```
 
+```
+flatter.getByKey("d")
+
+{ e: 5, f: 6 }
+```
+
 Check if the object has a key:
 ```
 flatter.has("g.h.i")
+
+true
+```
+
+Check if the object has key includes a value:
+```
+flatter.includes("g.h")
 
 true
 ```

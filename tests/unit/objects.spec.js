@@ -147,6 +147,34 @@ const getTestCases = [
         key: 'turtles.0',
         expectedValue: 'Donatello',
     },
+    {
+        description: 'Nested key',
+        arr: {
+            turtles: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
+            food: ['Pizza'],
+            mice: ['Splinter'],
+        },
+        key: 'turtles',
+        expectedValue: {
+            0: 'Donatello',
+            1: 'Michelangelo',
+            2: 'Raphael',
+            3: 'Leonardo',
+        },
+    },
+    {
+        description: 'Nested key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            g: { h: { i: 7 } },
+        },
+        key: 'd',
+        defaultValue: 'nope',
+        expectedValue: { e: 5, f: 6 },
+    },
 ];
 
 describe.each(getTestCases)(
