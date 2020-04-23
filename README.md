@@ -1,6 +1,6 @@
 # Hack JavaScript objects
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 
 Get a flat version of the object
 
@@ -120,3 +120,5 @@ true
 [travis-image]: https://img.shields.io/travis/hckrnews/objects/master.svg
 [coveralls-url]: https://coveralls.io/r/hckrnews/objects
 [coveralls-image]: https://img.shields.io/coveralls/hckrnews/objects/master.svg
+[scrutinizer-url]:https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
+[scrutinizer-image]:(https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
