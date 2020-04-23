@@ -120,5 +120,5 @@ true
 [travis-image]: https://img.shields.io/travis/hckrnews/objects/master.svg
 [coveralls-url]: https://coveralls.io/r/hckrnews/objects
 [coveralls-image]: https://img.shields.io/coveralls/hckrnews/objects/master.svg
-[scrutinizer-url]:https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
-[scrutinizer-image]:(https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
+[scrutinizer-url]: https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
+[scrutinizer-image]: https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
