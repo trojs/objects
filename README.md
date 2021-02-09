@@ -19,7 +19,7 @@ or
 ## Usage
 
 Example usage:
-```
+```javascript
 const flatter = new Obj({
     a: 1,
     b: 2,
@@ -30,7 +30,7 @@ const flatter = new Obj({
 ```
 
 You can get the flat object by:
-```
+```javascript
 flatter.flat
 
 {
@@ -45,7 +45,7 @@ flatter.flat
 ```
 
 You can get the object entries by:
-```
+```javascript
 flatter.entries()
 
 [
@@ -60,58 +60,83 @@ flatter.entries()
 ```
 
 You can get the object keys by:
-```
+```javascript
 flatter.keys()
 
 ["a", "b", "c.0", "c.1", "d.e", "d.f", "g.h.i"]
 ```
 
 You can get the object values by:
-```
+```javascript
 flatter.values()
 
 [1, 2, 3, 4, 5, 6, 7]
 ```
 
 You can get the object length by:
-```
+```javascript
 flatter.length
 
 7
 ```
 
 You can get by key by:
-```
+```javascript
 flatter.getByKey("g.h.i")
 
 7
 ```
 
 Or set a fallback value by:
-```
+```javascript
 flatter.getByKey("x.y.z", 42)
 
 42
 ```
 
-```
+```javascript
 flatter.getByKey("d")
 
 { e: 5, f: 6 }
 ```
 
 Check if the object has a key:
-```
+```javascript
 flatter.has("g.h.i")
 
 true
 ```
 
 Check if the object has key includes a value:
-```
+```javascript
 flatter.includes("g.h")
 
 true
+```
+
+You can get only some fields from the object:
+```javascript
+flatter.getKeys(['a', 'c', 'd.e', 'g.h'])
+
+{
+    a: 1,
+    c: [3, 4],
+    'd.e': 5,
+    'g.h': { i: 7 },
+}
+```
+
+And you can also get some fields from the object in the flat format:
+```javascript
+flatter.getFlatKeys(['a', 'c', 'd.e', 'g.h'])
+
+{
+    a: 1,
+    'c.0': 3,
+    'c.1': 4,
+    'd.e': 5,
+    'g.h.i': 7,
+}
 ```
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects

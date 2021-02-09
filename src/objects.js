@@ -7,16 +7,12 @@ module.exports = class Obj {
      *
      * @param {object} original
      * @param {string} prefix
-     *
-     * @return {object}
      */
     constructor(original, prefix) {
         this.original = original;
         this.prefix = prefix;
         this.flatObject = {};
         this.parse();
-
-        return this;
     }
 
     /**
@@ -98,6 +94,10 @@ module.exports = class Obj {
      * @return {object|null}
      */
     getByKey(key, defaultValue) {
+        if (this.originalHas(key)) {
+            return Object.getOwnPropertyDescriptor(this.original, key).value;
+        }
+
         if (this.has(key)) {
             return this.flatObject[key];
         }
@@ -113,6 +113,64 @@ module.exports = class Obj {
         }
 
         return defaultValue;
+    }
+
+    /**
+     * Get keys of an item.
+     *
+     * @param {array} keys
+     * @param {object|null} defaultValue
+     *
+     * @return {object|null}
+     */
+    getFlatKeys(keys, defaultValue) {
+        const result = this.entries().filter(([currentKey]) =>
+            keys.some(key => currentKey.startsWith(key))
+        );
+
+        if (result.length < 1) {
+            return defaultValue;
+        }
+
+        return Object.fromEntries(result);
+    }
+
+    /**
+     * Get keys of an item.
+     *
+     * @param {array} keys
+     * @param {object|null} defaultValue
+     *
+     * @return {object|null}
+     */
+    getKeys(keys, defaultValue) {
+        const result = keys.reduce((accumulator, currentKey) => {
+            const key = currentKey.toString();
+            const value = this.getByKey(key);
+
+            if (value) {
+                accumulator[key] = value;
+            }
+
+            return accumulator;
+        }, {});
+
+        if (Object.keys(result).length < 1) {
+            return defaultValue;
+        }
+
+        return result;
+    }
+
+    /**
+     * Check if the original object has a key.
+     *
+     * @param {string} key
+     *
+     * @return {boolean}
+     */
+    originalHas(key) {
+        return Object.prototype.hasOwnProperty.call(this.original, key);
     }
 
     /**
