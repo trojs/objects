@@ -155,12 +155,7 @@ const getTestCases = [
             mice: ['Splinter'],
         },
         key: 'turtles',
-        expectedValue: {
-            0: 'Donatello',
-            1: 'Michelangelo',
-            2: 'Raphael',
-            3: 'Leonardo',
-        },
+        expectedValue: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
     },
     {
         description: 'Nested sub keys',
@@ -186,6 +181,19 @@ const getTestCases = [
         },
         key: 'd',
         expectedValue: { e: 5, f: 6 },
+    },
+    {
+        description: 'Nested key from flat object with an array',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            'd.e': 5,
+            'd.f': 6,
+            'g.h.i': 7,
+        },
+        key: 'c',
+        expectedValue: [3, 4],
     },
 ];
 
@@ -234,6 +242,199 @@ describe.each(hasTestCases)(
     ({ description, arr, key, expectedValue }) => {
         it(description, () => {
             expect(new Obj(arr).has(key)).toEqual(expectedValue);
+        });
+    }
+);
+
+const getKeysTestCases = [
+    {
+        description: 'Check if we can a single keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['turtle'],
+        expectedValue: {
+            turtle: 'Leonardo',
+        },
+    },
+    {
+        description: 'Check if we can get multiple keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['food', 'mice'],
+        expectedValue: {
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+    },
+    {
+        description: 'Check if we only get existing keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['food', 'drink'],
+        defaultValue: {
+            result: 'ok',
+        },
+        expectedValue: {
+            food: 'Pizza',
+        },
+    },
+    {
+        description: 'Check if we get an empty object if no keys exist',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['drink'],
+        expectedValue: undefined,
+    },
+    {
+        description: 'Check if we get the default value if no keys exists',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['drink'],
+        defaultValue: {
+            result: 'ok',
+        },
+        expectedValue: {
+            result: 'ok',
+        },
+    },
+    {
+        description: 'Check if we get deep nested keys',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            g: { h: { i: 7 } },
+        },
+        keys: ['a', 'c', 'd.e', 'g.h'],
+        expectedValue: {
+            a: 1,
+            c: [3, 4],
+            'd.e': 5,
+            'g.h': { i: 7 },
+        },
+    },
+];
+
+describe.each(getKeysTestCases)(
+    'Check if the object has the keys',
+    ({ description, arr, keys, defaultValue, expectedValue }) => {
+        it(description, () => {
+            expect(new Obj(arr).getKeys(keys, defaultValue)).toEqual(
+                expectedValue
+            );
+        });
+    }
+);
+
+const getFlatKeysTestCases = [
+    {
+        description: 'Check if we can a single keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['turtle'],
+        expectedValue: {
+            turtle: 'Leonardo',
+        },
+    },
+    {
+        description: 'Check if we can get multiple keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['food', 'mice'],
+        expectedValue: {
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+    },
+    {
+        description: 'Check if we only get existing keys',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['food', 'drink'],
+        defaultValue: {
+            result: 'ok',
+        },
+        expectedValue: {
+            food: 'Pizza',
+        },
+    },
+    {
+        description: 'Check if we get an empty object if no keys exist',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['drink'],
+        expectedValue: undefined,
+    },
+    {
+        description: 'Check if we get the default value if no keys exists',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        keys: ['drink'],
+        defaultValue: {
+            result: 'ok',
+        },
+        expectedValue: {
+            result: 'ok',
+        },
+    },
+    {
+        description: 'Check if we get deep nested keys',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            g: { h: { i: 7 } },
+        },
+        keys: ['a', 'c', 'd.e', 'g.h'],
+        expectedValue: {
+            a: 1,
+            'c.0': 3,
+            'c.1': 4,
+            'd.e': 5,
+            'g.h.i': 7,
+        },
+    },
+];
+
+describe.each(getFlatKeysTestCases)(
+    'Check if the object has the keys (flat',
+    ({ description, arr, keys, defaultValue, expectedValue }) => {
+        it(description, () => {
+            expect(new Obj(arr).getFlatKeys(keys, defaultValue)).toEqual(
+                expectedValue
+            );
         });
     }
 );
