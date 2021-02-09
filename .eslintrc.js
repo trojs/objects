@@ -5,6 +5,11 @@ module.exports = {
         node: true,
         browser: true
     },
+    globals: {
+        describe: false,
+        it: false ,
+        expect: false
+    },
     extends: ['@hckrnews/eslint-config'],
     parserOptions: {
         sourceType: "module",

@@ -7,16 +7,12 @@ module.exports = class Obj {
      *
      * @param {object} original
      * @param {string} prefix
-     *
-     * @return {object}
      */
     constructor(original, prefix) {
         this.original = original;
         this.prefix = prefix;
         this.flatObject = {};
         this.parse();
-
-        return this;
     }
 
     /**
