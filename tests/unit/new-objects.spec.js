@@ -1,5 +1,7 @@
 import Obj from '../../src/objects';
 
+const ObjectWithoutSchema = Obj();
+
 const TestCases = [
     {
         description: 'Simple object',
@@ -56,7 +58,9 @@ describe.each(TestCases)(
     'Test objects.js',
     ({ description, input, expectedResult }) => {
         it(description, () => {
-            expect(new Obj(input).flat).toMatchObject(expectedResult);
+            expect(new ObjectWithoutSchema(input).flat).toMatchObject(
+                expectedResult
+            );
         });
     }
 );
@@ -80,7 +84,9 @@ describe('Test objects.js methods', () => {
             ['g.h.i', 7],
         ];
 
-        expect(new Obj(input).entries()).toMatchObject(expectedResult);
+        expect(new ObjectWithoutSchema(input).entries()).toMatchObject(
+            expectedResult
+        );
     });
 
     it('Get the keys', () => {
@@ -93,7 +99,9 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = ['a', 'b', 'c.0', 'c.1', 'd.e', 'd.f', 'g.h.i'];
 
-        expect(new Obj(input).keys()).toMatchObject(expectedResult);
+        expect(new ObjectWithoutSchema(input).keys()).toMatchObject(
+            expectedResult
+        );
     });
 
     it('Get the values', () => {
@@ -106,7 +114,9 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = [1, 2, 3, 4, 5, 6, 7];
 
-        expect(new Obj(input).values()).toMatchObject(expectedResult);
+        expect(new ObjectWithoutSchema(input).values()).toMatchObject(
+            expectedResult
+        );
     });
 
     it('Get the length', () => {
@@ -119,7 +129,7 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = 7;
 
-        expect(new Obj(input).length).toBe(expectedResult);
+        expect(new ObjectWithoutSchema(input).length).toBe(expectedResult);
     });
 });
 
@@ -201,9 +211,9 @@ describe.each(getTestCases)(
     'Get value by key',
     ({ description, arr, key, defaultValue, expectedValue }) => {
         it(description, () => {
-            expect(new Obj(arr).getByKey(key, defaultValue)).toEqual(
-                expectedValue
-            );
+            expect(
+                new ObjectWithoutSchema(arr).getByKey(key, defaultValue)
+            ).toEqual(expectedValue);
         });
     }
 );
@@ -241,7 +251,9 @@ describe.each(hasTestCases)(
     'Check if the object has a key',
     ({ description, arr, key, expectedValue }) => {
         it(description, () => {
-            expect(new Obj(arr).has(key)).toEqual(expectedValue);
+            expect(new ObjectWithoutSchema(arr).has(key)).toEqual(
+                expectedValue
+            );
         });
     }
 );
@@ -335,9 +347,9 @@ describe.each(getKeysTestCases)(
     'Check if the object has the keys',
     ({ description, arr, keys, defaultValue, expectedValue }) => {
         it(description, () => {
-            expect(new Obj(arr).getKeys(keys, defaultValue)).toEqual(
-                expectedValue
-            );
+            expect(
+                new ObjectWithoutSchema(arr).getKeys(keys, defaultValue)
+            ).toEqual(expectedValue);
         });
     }
 );
@@ -432,9 +444,9 @@ describe.each(getFlatKeysTestCases)(
     'Check if the object has the keys (flat',
     ({ description, arr, keys, defaultValue, expectedValue }) => {
         it(description, () => {
-            expect(new Obj(arr).getFlatKeys(keys, defaultValue)).toEqual(
-                expectedValue
-            );
+            expect(
+                new ObjectWithoutSchema(arr).getFlatKeys(keys, defaultValue)
+            ).toEqual(expectedValue);
         });
     }
 );

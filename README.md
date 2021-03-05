@@ -20,7 +20,31 @@ or
 
 Example usage:
 ```javascript
-const flatter = new Obj({
+const addressSchema = {
+    street: String,
+    number: Number,
+    postalCode: String,
+    city: String,
+    country: String,
+};
+
+const Address = Obj({ schema: addressSchema })
+
+const myAddress = new Address({
+    street: 'Abc',
+    number: 42,
+    postalCode: '1234AB',
+    city: 'Example',
+    country: 'The Netherlands'
+})
+```
+
+Example usage without a schema:
+...
+
+```javascript
+const ObjectWithoutSchema = Obj()
+const flatter = new ObjectWithoutSchema({
     a: 1,
     b: 2,
     c: [3, 4],
