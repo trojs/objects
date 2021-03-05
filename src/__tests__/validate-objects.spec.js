@@ -1,5 +1,5 @@
 /* eslint-disable no-new */
-import Obj from '../../src/objects';
+import Obj from '../objects';
 
 describe('Object test', () => {
     const addressSchema = {

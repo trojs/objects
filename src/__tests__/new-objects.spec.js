@@ -1,4 +1,4 @@
-import Obj from '../../src/objects';
+import Obj from '../objects';
 
 const ObjectWithoutSchema = Obj();
 

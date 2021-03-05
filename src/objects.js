@@ -7,7 +7,7 @@ import { Validator } from '@hckrnews/validator';
  *
  * @return {class}
  */
-module.exports = options => {
+const ObjectGenerator = options => {
     const schema = options?.schema;
     const validator = schema ? new Validator(schema) : null;
 
@@ -226,3 +226,5 @@ module.exports = options => {
         }
     };
 };
+
+export default ObjectGenerator;
