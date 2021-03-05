@@ -1,22 +1,43 @@
 {
     "name": "@hckrnews/objects",
     "description": "Hack JavaScript objects",
-    "version": "1.3.0",
+    "version": "2.0.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
     },
     "license": "AGPL-3.0",
     "scripts": {
+        "build": "microbundle --target node",
+        "dev": "microbundle --target node watch",
+        "lint": "eslint src/*.js --config .eslintrc",
+        "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "jest",
-        "lint": "eslint .",
+        "test:watch": "jest src --watch",
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "cpd": "node_modules/jscpd/bin/jscpd src"
     },
-    "main": "src/objects.js",
     "files": [
         "src/objects.js"
     ],
+    "source": "src/objects.js",
+    "main": "dist/objects.js",
+    "module": "dist/objects.module.mjs",
+    "esmodule": "dist/objects.modern.mjs",
+    "unpkg": "dist/objects.umd.cjs",
+    "umd:main": "dist/objects.umd.cjs",
+    "exports": {
+        ".": {
+            "require": "./dist/objects.umd.cjs",
+            "import": "./dist/objects.module.mjs",
+            "default": "./dist/objects.js"
+        },
+        "./source": "./src/objects.js",
+        "./main": "./dist/objects.js",
+        "./module": "./dist/objects.module.mjs",
+        "./modern": "./dist/objects.modern.mjs",
+        "./umd": "./dist/objects.umd.cjs"
+    },
     "devDependencies": {
         "@babel/core": "^7.9.0",
         "@babel/preset-env": "^7.9.5",
@@ -35,6 +56,7 @@
         "eslint-plugin-vue": "^6.2.2",
         "jest": "^26.6.3",
         "jscpd": "^3.2.1",
+        "microbundle": "^0.13.0",
         "prettier": "^1.19.1"
     },
     "repository": {
@@ -42,10 +64,13 @@
         "url": "https://github.com/hckrnews/objects"
     },
     "engines": {
-        "node": ">=12"
+        "node": ">= 14"
     },
     "keywords": [
         "objects",
         "flat"
-    ]
+    ],
+    "dependencies": {
+        "@hckrnews/validator": "^2.1.7"
+    }
 }
