@@ -224,7 +224,27 @@ const ObjectGenerator = options => {
         includes(key) {
             return this.keys().filter(item => item.startsWith(key)).length > 0;
         }
+
+        static create(data) {
+            const obj = new Obj(data);
+            return Object.setPrototypeOf(data, {
+                ...Object.getPrototypeOf(data),
+                length: obj.length,
+                flat: obj.flat,
+                entries: () => obj.entries(),
+                keys: () => obj.keys(),
+                values: () => obj.values(),
+                getByKey: (key, defaultValue) =>
+                    obj.getByKey(key, defaultValue),
+                has: key => obj.has(key),
+                originalHas: key => obj.originalHas(key),
+                getKeys: (keys, defaultValue) =>
+                    obj.getKeys(keys, defaultValue),
+                getFlatKeys: (keys, defaultValue) =>
+                    obj.getFlatKeys(keys, defaultValue),
+                includes: key => obj.includes(key),
+            });
+        }
     };
 };
-
 export default ObjectGenerator;

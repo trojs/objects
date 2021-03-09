@@ -13,7 +13,7 @@ describe('Object test', () => {
     const Address = Obj({ schema: addressSchema });
 
     it('It should validate the input and set the original object', () => {
-        const myAddress = new Address({
+        const myAddress = Address.create({
             street: 'Abc',
             number: 42,
             postalCode: '1234AB',
@@ -21,7 +21,7 @@ describe('Object test', () => {
             country: 'The Netherlands',
         });
 
-        expect(myAddress.original).toEqual({
+        expect(myAddress).toEqual({
             street: 'Abc',
             number: 42,
             postalCode: '1234AB',
@@ -32,7 +32,7 @@ describe('Object test', () => {
 
     it('It should throw an exception', () => {
         expect(() => {
-            new Address({
+            Address.create({
                 street: 'Abc',
                 number: 'xyz',
                 postalCode: '1234AB',
@@ -44,7 +44,7 @@ describe('Object test', () => {
 
     it('It should throw an exception', () => {
         expect(() => {
-            new Address({
+            Address.create({
                 street: 'Abc',
                 number: 42,
                 postalCode: '1234AB',

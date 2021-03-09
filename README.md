@@ -30,7 +30,7 @@ const addressSchema = {
 
 const Address = Obj({ schema: addressSchema })
 
-const myAddress = new Address({
+const myAddress = Address.create({
     street: 'Abc',
     number: 42,
     postalCode: '1234AB',
@@ -44,7 +44,7 @@ Example usage without a schema:
 
 ```javascript
 const ObjectWithoutSchema = Obj()
-const flatter = new ObjectWithoutSchema({
+const flatter = ObjectWithoutSchema.create({
     a: 1,
     b: 2,
     c: [3, 4],

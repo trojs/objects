@@ -58,7 +58,7 @@ describe.each(TestCases)(
     'Test objects.js',
     ({ description, input, expectedResult }) => {
         it(description, () => {
-            expect(new ObjectWithoutSchema(input).flat).toMatchObject(
+            expect(ObjectWithoutSchema.create(input).flat).toMatchObject(
                 expectedResult
             );
         });
@@ -84,7 +84,7 @@ describe('Test objects.js methods', () => {
             ['g.h.i', 7],
         ];
 
-        expect(new ObjectWithoutSchema(input).entries()).toMatchObject(
+        expect(ObjectWithoutSchema.create(input).entries()).toMatchObject(
             expectedResult
         );
     });
@@ -99,7 +99,7 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = ['a', 'b', 'c.0', 'c.1', 'd.e', 'd.f', 'g.h.i'];
 
-        expect(new ObjectWithoutSchema(input).keys()).toMatchObject(
+        expect(ObjectWithoutSchema.create(input).keys()).toMatchObject(
             expectedResult
         );
     });
@@ -114,7 +114,7 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = [1, 2, 3, 4, 5, 6, 7];
 
-        expect(new ObjectWithoutSchema(input).values()).toMatchObject(
+        expect(ObjectWithoutSchema.create(input).values()).toMatchObject(
             expectedResult
         );
     });
@@ -129,7 +129,7 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = 7;
 
-        expect(new ObjectWithoutSchema(input).length).toBe(expectedResult);
+        expect(ObjectWithoutSchema.create(input).length).toBe(expectedResult);
     });
 });
 
@@ -212,7 +212,7 @@ describe.each(getTestCases)(
     ({ description, arr, key, defaultValue, expectedValue }) => {
         it(description, () => {
             expect(
-                new ObjectWithoutSchema(arr).getByKey(key, defaultValue)
+                ObjectWithoutSchema.create(arr).getByKey(key, defaultValue)
             ).toEqual(expectedValue);
         });
     }
@@ -251,7 +251,47 @@ describe.each(hasTestCases)(
     'Check if the object has a key',
     ({ description, arr, key, expectedValue }) => {
         it(description, () => {
-            expect(new ObjectWithoutSchema(arr).has(key)).toEqual(
+            expect(ObjectWithoutSchema.create(arr).has(key)).toEqual(
+                expectedValue
+            );
+        });
+    }
+);
+
+const originalHasTestCases = [
+    {
+        description: 'Check a key that doesnt exists',
+        arr: {},
+        key: 'pizza',
+        expectedValue: false,
+    },
+    {
+        description: 'Simple key check',
+        arr: {
+            turtle: 'Leonardo',
+            food: 'Pizza',
+            mice: 'Splinter',
+        },
+        key: 'turtle',
+        expectedValue: true,
+    },
+    {
+        description: 'Nested key check',
+        arr: {
+            turtles: ['Donatello', 'Michelangelo', 'Raphael', 'Leonardo'],
+            food: ['Pizza'],
+            mice: ['Splinter'],
+        },
+        key: 'turtles.0',
+        expectedValue: false,
+    },
+];
+
+describe.each(originalHasTestCases)(
+    'Check if the original object has a key',
+    ({ description, arr, key, expectedValue }) => {
+        it(description, () => {
+            expect(ObjectWithoutSchema.create(arr).originalHas(key)).toEqual(
                 expectedValue
             );
         });
@@ -348,7 +388,7 @@ describe.each(getKeysTestCases)(
     ({ description, arr, keys, defaultValue, expectedValue }) => {
         it(description, () => {
             expect(
-                new ObjectWithoutSchema(arr).getKeys(keys, defaultValue)
+                ObjectWithoutSchema.create(arr).getKeys(keys, defaultValue)
             ).toEqual(expectedValue);
         });
     }
@@ -441,12 +481,86 @@ const getFlatKeysTestCases = [
 ];
 
 describe.each(getFlatKeysTestCases)(
-    'Check if the object has the keys (flat',
+    'Check if the object has the keys (flat)',
     ({ description, arr, keys, defaultValue, expectedValue }) => {
         it(description, () => {
             expect(
-                new ObjectWithoutSchema(arr).getFlatKeys(keys, defaultValue)
+                ObjectWithoutSchema.create(arr).getFlatKeys(keys, defaultValue)
             ).toEqual(expectedValue);
+        });
+    }
+);
+
+const includesTestCases = [
+    {
+        description: 'Check if the array includes a key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            test: { second: { third: 7 } },
+        },
+        key: 'a',
+        expectedValue: true,
+    },
+    {
+        description: 'Check if the array includes a sub key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            test: { second: { third: 7 } },
+        },
+        key: 'd.e',
+        expectedValue: true,
+    },
+    {
+        description: 'Check if the array doesnt includes a key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            test: { second: { third: 7 } },
+        },
+        key: 'd.g',
+        expectedValue: false,
+    },
+    {
+        description: 'Check if the array includes a part of a key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            test: { second: { third: 7 } },
+        },
+        key: 'tes',
+        expectedValue: true,
+    },
+    {
+        description: 'Check if the array includes a part of a sub key',
+        arr: {
+            a: 1,
+            b: 2,
+            c: [3, 4],
+            d: { e: 5, f: 6 },
+            test: { second: { third: 7 } },
+        },
+        key: 'test.sec',
+        expectedValue: true,
+    },
+];
+
+describe.each(includesTestCases)(
+    'Check if the object includes a key',
+    ({ description, arr, key, expectedValue }) => {
+        it(description, () => {
+            expect(ObjectWithoutSchema.create(arr).includes(key)).toEqual(
+                expectedValue
+            );
         });
     }
 );
