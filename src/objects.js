@@ -3,12 +3,11 @@ import { Validator } from '@hckrnews/validator';
 /**
  * Object helper
  *
- * @param {object} options
+ * @param {object} schema
  *
  * @return {class}
  */
-const ObjectGenerator = options => {
-    const schema = options?.schema;
+const ObjectGenerator = ({ schema } = {}) => {
     const validator = schema ? new Validator(schema) : null;
 
     return class Obj {
@@ -200,7 +199,7 @@ const ObjectGenerator = options => {
          * @return {boolean}
          */
         originalHas(key) {
-            return Object.prototype.hasOwnProperty.call(this.original, key);
+            return key in this.original;
         }
 
         /**
@@ -211,7 +210,7 @@ const ObjectGenerator = options => {
          * @return {boolean}
          */
         has(key) {
-            return Object.prototype.hasOwnProperty.call(this.flatObject, key);
+            return key in this.flatObject;
         }
 
         /**

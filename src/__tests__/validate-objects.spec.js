@@ -28,6 +28,14 @@ describe('Object test', () => {
             city: 'Example',
             country: 'The Netherlands',
         });
+
+        expect(myAddress.keys()).toEqual([
+            'street',
+            'number',
+            'postalCode',
+            'city',
+            'country',
+        ]);
     });
 
     it('It should throw an exception', () => {
