@@ -37,14 +37,23 @@ const myAddress = Address.create({
     city: 'Example',
     country: 'The Netherlands'
 })
+
+console.log(myAddress)
+
+{
+    street: 'Abc',
+    number: 42,
+    postalCode: '1234AB',
+    city: 'Example',
+    country: 'The Netherlands'
+}
 ```
 
 Example usage without a schema:
 ...
 
 ```javascript
-const ObjectWithoutSchema = Obj()
-const flatter = ObjectWithoutSchema.create({
+const flatter = Obj().create({
     a: 1,
     b: 2,
     c: [3, 4],
