@@ -79,6 +79,6 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/validator": "^2.1.7"
+        "@hckrnews/validator": "^4.0.0"
     }
 }
