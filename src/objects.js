@@ -52,7 +52,10 @@ const ObjectGenerator = ({ schema } = {}) => {
                         index = [this.prefix, originalRowIndex].join('.');
                     }
 
-                    if (typeof originalRow === 'object') {
+                    if (
+                        originalRow.constructor === Object ||
+                        originalRow.constructor === Array
+                    ) {
                         const childRows = new Obj(originalRow, index).flat;
 
                         this.flatObject = Object.assign(
