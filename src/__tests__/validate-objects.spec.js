@@ -1,5 +1,7 @@
 /* eslint-disable no-new */
 import Obj from '../objects';
+import test1Schema from '../schemas/test1';
+import Test2 from '../schemas/test2';
 
 describe('Object test', () => {
     const addressSchema = {
@@ -12,6 +14,8 @@ describe('Object test', () => {
     };
 
     const Address = Obj({ schema: addressSchema });
+    const Test = Obj({ schema: test1Schema });
+    const test2 = new Test2('me');
 
     it('It should validate the input and set the original object', () => {
         const build = () => {};
@@ -64,5 +68,17 @@ describe('Object test', () => {
                 city: 'Example',
             });
         }).toThrowError('The field country should be a String');
+    });
+
+    it('It should valid with this custom type', () => {
+        const data = {
+            name: 'test',
+            test: test2
+        }
+        const test = Test.create(data)
+        expect(test).toEqual({
+            name: 'test',
+            test: test2
+        });
     });
 });
