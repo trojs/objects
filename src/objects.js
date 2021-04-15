@@ -154,7 +154,7 @@ const ObjectGenerator = ({ schema } = {}) => {
          */
         getFlatKeys(keys, defaultValue) {
             const result = this.entries().filter(([currentKey]) =>
-                keys.some(key => currentKey.startsWith(key))
+                keys.some((key) => currentKey.startsWith(key))
             );
 
             if (result.length < 1) {
@@ -221,7 +221,9 @@ const ObjectGenerator = ({ schema } = {}) => {
          * @return {boolean}
          */
         includes(key) {
-            return this.keys().filter(item => item.startsWith(key)).length > 0;
+            return (
+                this.keys().filter((item) => item.startsWith(key)).length > 0
+            );
         }
 
         static create(data) {
@@ -235,13 +237,13 @@ const ObjectGenerator = ({ schema } = {}) => {
                 values: () => obj.values(),
                 getByKey: (key, defaultValue) =>
                     obj.getByKey(key, defaultValue),
-                has: key => obj.has(key),
-                originalHas: key => obj.originalHas(key),
+                has: (key) => obj.has(key),
+                originalHas: (key) => obj.originalHas(key),
                 getKeys: (keys, defaultValue) =>
                     obj.getKeys(keys, defaultValue),
                 getFlatKeys: (keys, defaultValue) =>
                     obj.getFlatKeys(keys, defaultValue),
-                includes: key => obj.includes(key),
+                includes: (key) => obj.includes(key),
             });
         }
     };
