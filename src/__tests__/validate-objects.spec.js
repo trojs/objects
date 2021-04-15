@@ -8,23 +8,23 @@ describe('Object test', () => {
         postalCode: String,
         city: String,
         country: String,
-        build: Function
+        build: Function,
     };
 
     const Address = Obj({ schema: addressSchema });
 
     it('It should validate the input and set the original object', () => {
-        const build = () => {}
+        const build = () => {};
         const myAddress = Address.create({
             street: 'Abc',
             number: 42,
             postalCode: '1234AB',
             city: 'Example',
             country: 'The Netherlands',
-            build
+            build,
         });
 
-        console.log({ myAddress })
+        console.log({ myAddress });
 
         expect(myAddress).toEqual({
             street: 'Abc',
@@ -32,7 +32,7 @@ describe('Object test', () => {
             postalCode: '1234AB',
             city: 'Example',
             country: 'The Netherlands',
-            build: build
+            build,
         });
 
         expect(myAddress.keys()).toEqual([
@@ -41,7 +41,7 @@ describe('Object test', () => {
             'postalCode',
             'city',
             'country',
-            'build'
+            'build',
         ]);
     });
 
