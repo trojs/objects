@@ -24,8 +24,6 @@ describe('Object test', () => {
             build,
         });
 
-        console.log({ myAddress });
-
         expect(myAddress).toEqual({
             street: 'Abc',
             number: 42,
