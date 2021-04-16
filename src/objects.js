@@ -32,7 +32,21 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         get subSchema() {
-            return this.subPrefix ? schema[this.subPrefix] : schema;
+            const subSchema = this.subPrefix ? schema[this.subPrefix] : schema;
+
+            if (subSchema) {
+                return subSchema;
+            }
+
+            if (schema[`${this.subPrefix}?`]) {
+                return schema[`${this.subPrefix}?`];
+            }
+
+            if (schema[`?${this.subPrefix}`]) {
+                return schema[`?${this.subPrefix}`];
+            }
+
+            return null;
         }
 
         get validator() {
@@ -47,6 +61,10 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         validate() {
             const { validator } = this;
+
+            if (!validator) {
+                return;
+            }
 
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
