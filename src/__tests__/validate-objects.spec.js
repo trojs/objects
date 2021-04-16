@@ -114,7 +114,7 @@ describe('Object test', () => {
                 name: 'test',
                 test: 'test',
             });
-        }).toThrowError('The field country should be a String');
+        }).toThrowError('The field ?test should be a Test2');
     });
 
     it('It should throw an exception if the sub schema is invalid', () => {
@@ -123,6 +123,6 @@ describe('Object test', () => {
                 name: 'test',
                 test3: 'test',
             });
-        }).toThrowError('The field country should be a String');
+        }).toThrowError('The field ?test3 should be');
     });
 });
