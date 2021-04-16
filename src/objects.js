@@ -25,17 +25,30 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.parse();
         }
 
-        validate() {
-            const subPrefix = `${this.prefix}`.includes('.')
+        get subPrefix() {
+            return `${this.prefix}`.includes('.')
                 ? this.prefix.split('.')[0]
                 : this.prefix;
-            const subSchema = subPrefix ? schema[subPrefix] : schema;
-            const validator = subSchema ? new Validator(subSchema) : null;
-            const originalData =
-                this.original.constructor === Array
-                    ? this.original
-                    : [this.original];
-            originalData.forEach((data) => {
+        }
+
+        get subSchema() {
+            return this.subPrefix ? schema[this.subPrefix] : schema;
+        }
+
+        get validator() {
+            return this.subSchema ? new Validator(this.subSchema) : null;
+        }
+
+        get originalData() {
+            return this.original.constructor === Array
+                ? this.original
+                : [this.original];
+        }
+
+        validate() {
+            const { validator } = this;
+
+            this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
                     const [field, type] = validator.errors[0];
                     if (type.constructor === String) {
