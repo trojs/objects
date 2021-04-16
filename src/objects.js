@@ -7,10 +7,8 @@ import { Validator } from '@hckrnews/validator';
  *
  * @return {class}
  */
-const ObjectGenerator = ({ schema } = {}) => {
-    const validator = schema ? new Validator(schema) : null;
-
-    return class Obj {
+const ObjectGenerator = ({ schema } = {}) =>
+    class Obj {
         /**
          * Set the original and prefix.
          *
@@ -21,23 +19,49 @@ const ObjectGenerator = ({ schema } = {}) => {
             this.original = original;
             this.prefix = prefix;
             this.flatObject = {};
-            if (validator) {
+            if (schema) {
                 this.validate();
             }
             this.parse();
         }
 
+        get subPrefix() {
+            return `${this.prefix}`.includes('.')
+                ? this.prefix.split('.')[0]
+                : this.prefix;
+        }
+
+        get subSchema() {
+            return this.subPrefix ? schema[this.subPrefix] : schema;
+        }
+
+        get validator() {
+            return this.subSchema ? new Validator(this.subSchema) : null;
+        }
+
+        get originalData() {
+            return this.original.constructor === Array
+                ? this.original
+                : [this.original];
+        }
+
         validate() {
-            if (!validator.validate(this.original)) {
-                const [field, type] = validator.errors[0];
-                if (type.constructor === String) {
-                    throw new Error(`The field ${field} should be a ${type}`);
-                } else {
-                    throw new Error(
-                        `The field ${field} should be a ${type.name}`
-                    );
+            const { validator } = this;
+
+            this.originalData.forEach((data) => {
+                if (!validator.validate(data)) {
+                    const [field, type] = validator.errors[0];
+                    if (type.constructor === String) {
+                        throw new Error(
+                            `The field ${field} should be a ${type}`
+                        );
+                    } else {
+                        throw new Error(
+                            `The field ${field} should be a ${type.name}`
+                        );
+                    }
                 }
-            }
+            });
         }
 
         /**
@@ -250,5 +274,4 @@ const ObjectGenerator = ({ schema } = {}) => {
             });
         }
     };
-};
 export default ObjectGenerator;
