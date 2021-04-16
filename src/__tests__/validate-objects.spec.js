@@ -73,12 +73,28 @@ describe('Object test', () => {
     it('It should valid with this custom type', () => {
         const data = {
             name: 'test',
-            test: test2
-        }
-        const test = Test.create(data)
+            test: test2,
+            test3: { name: 'test' },
+        };
+        const test = Test.create(data);
         expect(test).toEqual({
             name: 'test',
-            test: test2
+            test: test2,
+            test3: { name: 'test' },
+        });
+    });
+
+    it('It should valid with this custom type and sub array', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test3: [{ name: 'test' }],
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test3: [{ name: 'test' }],
         });
     });
 });

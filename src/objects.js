@@ -7,10 +7,8 @@ import { Validator } from '@hckrnews/validator';
  *
  * @return {class}
  */
-const ObjectGenerator = ({ schema } = {}) => {
-    const validator = schema ? new Validator(schema) : null;
-
-    return class Obj {
+const ObjectGenerator = ({ schema } = {}) =>
+    class Obj {
         /**
          * Set the original and prefix.
          *
@@ -21,23 +19,36 @@ const ObjectGenerator = ({ schema } = {}) => {
             this.original = original;
             this.prefix = prefix;
             this.flatObject = {};
-            if (validator) {
+            if (schema) {
                 this.validate();
             }
             this.parse();
         }
 
         validate() {
-            if (!validator.validate(this.original)) {
-                const [field, type] = validator.errors[0];
-                if (type.constructor === String) {
-                    throw new Error(`The field ${field} should be a ${type}`);
-                } else {
-                    throw new Error(
-                        `The field ${field} should be a ${type.name}`
-                    );
+            const subPrefix = `${this.prefix}`.includes('.')
+                ? this.prefix.split('.')[0]
+                : this.prefix;
+            const subSchema = subPrefix ? schema[subPrefix] : schema;
+            const validator = subSchema ? new Validator(subSchema) : null;
+            const originalData =
+                this.original.constructor === Array
+                    ? this.original
+                    : [this.original];
+            originalData.forEach((data) => {
+                if (!validator.validate(data)) {
+                    const [field, type] = validator.errors[0];
+                    if (type.constructor === String) {
+                        throw new Error(
+                            `The field ${field} should be a ${type}`
+                        );
+                    } else {
+                        throw new Error(
+                            `The field ${field} should be a ${type.name}`
+                        );
+                    }
                 }
-            }
+            });
         }
 
         /**
@@ -250,5 +261,4 @@ const ObjectGenerator = ({ schema } = {}) => {
             });
         }
     };
-};
 export default ObjectGenerator;
