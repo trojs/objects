@@ -70,6 +70,16 @@ describe('Object test', () => {
         }).toThrowError('The field country should be a String');
     });
 
+    it('It should valid with this custom optional type', () => {
+        const data = {
+            name: 'test',
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+        });
+    });
+
     it('It should valid with this custom type', () => {
         const data = {
             name: 'test',
@@ -96,5 +106,32 @@ describe('Object test', () => {
             test: test2,
             test3: [{ name: 'test' }],
         });
+    });
+
+    it('It should throw an exception if the custom type is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                test: 'test',
+            });
+        }).toThrowError('The field ?test should be a Test2');
+    });
+
+    it('It should throw an exception if the sub schema is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                test3: 'test',
+            });
+        }).toThrowError('The field name should be a String');
+    });
+
+    it('It should throw an exception if the custom type is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                obj: 'test',
+            });
+        }).toThrowError('The field obj? should be a Object');
     });
 });
