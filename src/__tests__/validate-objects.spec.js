@@ -123,6 +123,15 @@ describe('Object test', () => {
                 name: 'test',
                 test3: 'test',
             });
-        }).toThrowError('The field ?test3 should be');
+        }).toThrowError('The field name should be a String');
+    });
+
+    it('It should throw an exception if the custom type is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                obj: 'test',
+            });
+        }).toThrowError('The field obj? should be a Object');
     });
 });
