@@ -84,13 +84,13 @@ describe('Object test', () => {
         const data = {
             name: 'test',
             test: test2,
-            test3: { name: 'test' },
+            test3: { example: 'test' },
         };
         const test = Test.create(data);
         expect(test).toEqual({
             name: 'test',
             test: test2,
-            test3: { name: 'test' },
+            test3: { example: 'test' },
         });
     });
 
@@ -98,13 +98,13 @@ describe('Object test', () => {
         const data = {
             name: 'test',
             test: test2,
-            test3: [{ name: 'test' }],
+            test3: [{ example: 'test' }],
         };
         const test = Test.create(data);
         expect(test).toEqual({
             name: 'test',
             test: test2,
-            test3: [{ name: 'test' }],
+            test3: [{ example: 'test' }],
         });
     });
 
@@ -133,5 +133,14 @@ describe('Object test', () => {
                 obj: 'test',
             });
         }).toThrowError('The field obj? should be a Object');
+    });
+
+    it('It should throw an exception if the custom type is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                test3: [{ example: 42 }],
+            });
+        }).toThrowError('The field example should be a String');
     });
 });
