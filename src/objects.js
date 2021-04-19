@@ -74,9 +74,14 @@ const ObjectGenerator = ({ schema } = {}) =>
                             `The field ${field} should be a ${type}`
                         );
                     } else if (type.constructor === Object) {
-                        const subTypes = new Obj(type).values();
+                        const subTypes = Object.entries(type);
+                        const [subField, subType] = subTypes[0];
+                        const subTypeName =
+                            subType.constructor === String
+                                ? subType
+                                : subType.name;
                         throw new Error(
-                            `The field ${field} should be a ${subTypes[0]}`
+                            `The field ${field}.${subField} should be a ${subTypeName}`
                         );
                     } else {
                         throw new Error(
