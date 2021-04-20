@@ -54,7 +54,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         get originalData() {
-            return this.original.constructor === Array
+            return this.original?.constructor === Array
                 ? this.original
                 : [this.original];
         }
@@ -69,15 +69,15 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
                     const [field, type] = validator.errors[0];
-                    if (type.constructor === String) {
+                    if (type?.constructor === String) {
                         throw new Error(
                             `The field ${field} should be a ${type}`
                         );
-                    } else if (type.constructor === Object) {
+                    } else if (type?.constructor === Object) {
                         const subTypes = Object.entries(type);
                         const [subField, subType] = subTypes[0];
                         const subTypeName =
-                            subType.constructor === String
+                            subType?.constructor === String
                                 ? subType
                                 : subType.name;
                         throw new Error(
@@ -105,8 +105,8 @@ const ObjectGenerator = ({ schema } = {}) =>
                     }
 
                     if (
-                        originalRow.constructor === Object ||
-                        originalRow.constructor === Array
+                        originalRow?.constructor === Object ||
+                        originalRow?.constructor === Array
                     ) {
                         const childRows = new Obj(originalRow, index).flat;
 
