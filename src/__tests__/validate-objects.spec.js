@@ -11,6 +11,7 @@ describe('Object test', () => {
         city: String,
         country: String,
         build: Function,
+        'example?': 'mixed',
     };
 
     const Address = Obj({ schema: addressSchema });
@@ -26,6 +27,7 @@ describe('Object test', () => {
             city: 'Example',
             country: 'The Netherlands',
             build,
+            example: 'ok',
         });
 
         expect(myAddress).toEqual({
@@ -35,6 +37,7 @@ describe('Object test', () => {
             city: 'Example',
             country: 'The Netherlands',
             build,
+            example: 'ok',
         });
 
         expect(myAddress.keys()).toEqual([
@@ -44,6 +47,7 @@ describe('Object test', () => {
             'city',
             'country',
             'build',
+            'example',
         ]);
     });
 
