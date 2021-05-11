@@ -112,6 +112,34 @@ describe('Object test', () => {
         });
     });
 
+    it('It should valid with this custom type and sub array v2', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test5: [{ example: 'test', example2: 'test' }],
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test5: [{ example: 'test', example2: 'test' }],
+        });
+    });
+
+    it('It should valid with a not existing key', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test6: [{ example: 'test' }],
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test6: [{ example: 'test' }],
+        });
+    });
+
     it('It should valid with a string for test4', () => {
         const data = {
             name: 'test',
@@ -184,5 +212,14 @@ describe('Object test', () => {
                 test3: [{ example: 42 }],
             });
         }).toThrowError('The field test3?.example should be a String');
+    });
+
+    it('It should throw an exception if the custom type is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                test5: [{ example: 42 }],
+            });
+        }).toThrowError('The field ?test5.example should be a string');
     });
 });
