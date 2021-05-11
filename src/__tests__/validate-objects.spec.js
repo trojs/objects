@@ -112,6 +112,44 @@ describe('Object test', () => {
         });
     });
 
+    it('It should valid with a string for test4', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test4: 'ok',
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test4: 'ok',
+        });
+    });
+
+    it('It should valid with a string for test4', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test4: 42,
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test4: 42,
+        });
+    });
+
+    it('It should throw an exception if test4 is invalid', () => {
+        expect(() => {
+            Test.create({
+                name: 'test',
+                test: test2,
+                test4: true,
+            });
+        }).toThrowError('The field test4? should be a string|number');
+    });
+
     it('It should throw an exception if the custom type is invalid', () => {
         expect(() => {
             Test.create({
