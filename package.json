@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Hack JavaScript objects",
-    "version": "2.3.4",
+    "version": "2.3.5",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -17,6 +17,7 @@
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "cpd": "node_modules/jscpd/bin/jscpd src"
     },
+    "type": "module",
     "files": [
         "src/objects.js",
         "dist/objects.js",
@@ -35,16 +36,11 @@
     "unpkg": "dist/objects.umd.cjs",
     "umd:main": "dist/objects.umd.cjs",
     "exports": {
-        ".": {
-            "require": "./dist/objects.umd.cjs",
-            "import": "./dist/objects.module.mjs",
-            "default": "./dist/objects.js"
+        "node": {
+            "module": "./src/objects.js",
+            "require": "./dist/objects.umd.cjs"
         },
-        "./source": "./src/objects.js",
-        "./main": "./dist/objects.js",
-        "./module": "./dist/objects.module.mjs",
-        "./modern": "./dist/objects.modern.mjs",
-        "./umd": "./dist/objects.umd.cjs"
+        "default": "./src/objects.js"
     },
     "devDependencies": {
         "@babel/core": "^7.9.0",
@@ -78,6 +74,6 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/validator": "^4.4.1"
+        "@hckrnews/validator": "^4.4.2"
     }
 }
