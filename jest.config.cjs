@@ -5,7 +5,7 @@ module.exports = {
         '^.+\\.js?$': 'babel-jest',
     },
 
-    transformIgnorePatterns: ['/node_modules/'],
+    transformIgnorePatterns: ['node_modules/(?!(@hckrnews)/)'],
 
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
