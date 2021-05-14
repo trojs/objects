@@ -1,15 +1,13 @@
 {
     "name": "@hckrnews/objects",
     "description": "Hack JavaScript objects",
-    "version": "2.3.5",
+    "version": "3.0.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
     },
     "license": "LGPL-3.0",
     "scripts": {
-        "build": "microbundle --target node",
-        "dev": "microbundle --target node watch",
         "lint": "eslint src/*.js --config .eslintrc",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "jest",
@@ -19,29 +17,9 @@
     },
     "type": "module",
     "files": [
-        "src/objects.js",
-        "dist/objects.js",
-        "dist/objects.js.map",
-        "dist/objects.module.mjs",
-        "dist/objects.module.mjs.map",
-        "dist/objects.modern.mjs",
-        "dist/objects.modern.mjs.map",
-        "dist/objects.umd.cjs",
-        "dist/objects.umd.cjs.map"
+        "src/objects.js"
     ],
-    "source": "src/objects.js",
-    "main": "dist/objects.js",
-    "module": "dist/objects.module.mjs",
-    "esmodule": "dist/objects.modern.mjs",
-    "unpkg": "dist/objects.umd.cjs",
-    "umd:main": "dist/objects.umd.cjs",
-    "exports": {
-        "node": {
-            "module": "./src/objects.js",
-            "require": "./dist/objects.umd.cjs"
-        },
-        "default": "./src/objects.js"
-    },
+    "main": "src/objects.js",
     "devDependencies": {
         "@babel/core": "^7.9.0",
         "@babel/preset-env": "^7.9.5",
@@ -74,6 +52,6 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/validator": "^4.4.2"
+        "@hckrnews/validator": "^5.0.0"
     }
 }
