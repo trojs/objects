@@ -50,7 +50,9 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         get validator() {
-            return this.subSchema ? new Validator(this.subSchema) : null;
+            return this.subSchema && this.subSchema.constructor === Object
+                ? new Validator(this.subSchema)
+                : null;
         }
 
         get originalData() {
