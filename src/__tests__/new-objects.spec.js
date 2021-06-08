@@ -1,3 +1,5 @@
+/** global: describe */
+
 import Obj from '../objects';
 
 const ObjectWithoutSchema = Obj();
