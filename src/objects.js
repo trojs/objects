@@ -25,12 +25,6 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.parse();
         }
 
-        get subPrefix() {
-            return `${this.prefix}`.includes('.')
-                ? this.prefix.split('.')[0]
-                : this.prefix;
-        }
-
         get subSchema() {
             if (!this.prefix) {
                 return schema;
