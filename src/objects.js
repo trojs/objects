@@ -32,21 +32,36 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         get subSchema() {
-            const subSchema = this.subPrefix ? schema[this.subPrefix] : schema;
-
-            if (subSchema) {
-                return subSchema;
+            if (!this.prefix) {
+                return schema;
             }
 
-            if (schema[`${this.subPrefix}?`]) {
-                return schema[`${this.subPrefix}?`];
+            const prefixParts = this.prefix.split('.');
+            let part = 0;
+
+            let subSchema = schema;
+            while (part < prefixParts.length) {
+                const currentPart = prefixParts[part];
+
+                if (subSchema[currentPart]) {
+                    subSchema = subSchema[currentPart];
+
+                    part += 1;
+                } else if (subSchema[`${currentPart}?`]) {
+                    subSchema = subSchema[`${currentPart}?`];
+
+                    part += 1;
+                } else if (subSchema[`?${currentPart}`]) {
+                    subSchema = subSchema[`?${currentPart}`];
+
+                    part += 1;
+                } else {
+                    subSchema = null;
+                    break;
+                }
             }
 
-            if (schema[`?${this.subPrefix}`]) {
-                return schema[`?${this.subPrefix}`];
-            }
-
-            return null;
+            return subSchema;
         }
 
         get validator() {
@@ -285,8 +300,10 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         static create(data) {
             const obj = new Obj(data);
+
             return Object.setPrototypeOf(data, {
                 ...Object.getPrototypeOf(data),
+                __obj__: obj,
                 length: obj.length,
                 flat: obj.flat,
                 entries: () => obj.entries(),
