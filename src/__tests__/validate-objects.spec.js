@@ -130,17 +130,31 @@ describe('Object test', () => {
         });
     });
 
-    it('It should valid with a not existing key', () => {
+    it('It should valid with this custom type and sub array v6', () => {
         const data = {
             name: 'test',
             test: test2,
-            test6: [{ example: 'test' }],
+            test6: { test7: [{ example: 'test' }] },
         };
         const test = Test.create(data);
         expect(test).toEqual({
             name: 'test',
             test: test2,
-            test6: [{ example: 'test' }],
+            test6: { test7: [{ example: 'test' }] },
+        });
+    });
+
+    it('It should valid with a not existing key', () => {
+        const data = {
+            name: 'test',
+            test: test2,
+            test8: [{ example: 'test' }],
+        };
+        const test = Test.create(data);
+        expect(test).toEqual({
+            name: 'test',
+            test: test2,
+            test8: [{ example: 'test' }],
         });
     });
 
