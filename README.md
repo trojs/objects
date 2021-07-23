@@ -20,7 +20,9 @@ or
 
 ## Validation
 
-For validation, it use the package `@hckrnews/validation` (https://github.com/hckrnews/validator)
+For validate the objects, it use the package `@hckrnews/validation` (https://www.npmjs.com/package/@hckrnews/validator)
+It will throw an error if the object isnt valid.
+For all posibilities, check the validation package readme.
 
 ## Usage
 
