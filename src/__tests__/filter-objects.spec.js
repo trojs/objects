@@ -8,7 +8,7 @@ const testSchema = {
 
 const Test = Obj({ schema: testSchema });
 
-describe('Test objects.js map', () => {
+describe('Test objects.js filter', () => {
     it('It should map the object like the array filter', () => {
         const input = {
             a: 1,

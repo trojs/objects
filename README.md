@@ -179,17 +179,71 @@ const input = {
 
 const test = Test.create(input)
 
-const mappedResults = test.filter((x) => x === 1)
+const filteredResults = test.filter((x) => x === 1)
 
 // Or you can do:
 const onlyOne = (x) => x === 1
-const mappedResults2 = test.filter(onlyOne)
+const filteredResults2 = test.filter(onlyOne)
 
-console.log(mappedResults)
+console.log(filteredResults)
 
 {
     a: 1,
 };
+```
+
+You can also use every:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const everythingIsBelowThree = test.every((x) => x < 3)
+
+// Or you can do:
+const isBelowThree = (x) => x < 3
+const everythingIsBelowThree2 = test.every(isBelowThree)
+
+console.log(everythingIsBelowThree)
+
+true
+```
+
+You can also use some:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const someAreTwo = test.some((x) => x === 2)
+
+// Or you can do:
+const isTwo = (x) => x === 2
+const someAreTwo2 = test.some(isTwo)
+
+console.log(someAreTwo)
+
+true
 ```
 
 Example usage without a schema:
@@ -349,6 +403,36 @@ flatter.flatFilter((x) => x === 1)
     'd.e': 1,
     'g.h.i': 1,
 };
+```
+
+And you can also use the flatEvery method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatEvery((x) => x < 3)
+
+true
+```
+
+And you can also use the flatSome method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatSome((x) => x === 2)
+
+true
 ```
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects
