@@ -1,5 +1,4 @@
-/** global: describe */
-
+import { expect, describe, it } from '@jest/globals';
 import Obj from '../objects';
 
 const ObjectWithoutSchema = Obj();

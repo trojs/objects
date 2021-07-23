@@ -1,8 +1,10 @@
-# Hack JavaScript objects
+# Create valid JavaScript objects
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 
-Get a flat version of the object
+Create objects and validate the values, so you know all values are ok.
+You don't have to create code to validate all fields of an object, just write a schema.
+Also get more usefull methods to work with objects.
 
 ## Installation
 
@@ -16,10 +18,16 @@ or
 or
 `yarn test`
 
+## Validation
+
+For validation, it use the package `@hckrnews/validation` (https://github.com/hckrnews/validator)
+
 ## Usage
 
 Example usage:
 ```javascript
+import Obj from '@hckrnews/objects'
+
 const addressSchema = {
     street: String,
     number: Number,
@@ -47,6 +55,195 @@ console.log(myAddress)
     city: 'Example',
     country: 'The Netherlands'
 }
+```
+
+You can also define sub schemas:
+
+```javascript
+import Obj from '@hckrnews/objects'
+
+const filterSchema = {
+  key: String,
+  type: String
+}
+
+const optionSchema = {
+  value: String,
+  'count?': Number
+}
+
+const selectFilterSchema = {
+  ...filterSchema,
+  options: optionSchema
+}
+
+const SelectFilter = Obj({ schema: selectFilterSchema })
+
+const multiselect = SelectFilter.create({
+    key: 'status',
+    type: 'multiselect',
+    options: [
+        {
+            value: 'open',
+            count: 42
+        },
+        {
+            value: 'closed'
+        }
+    ]
+})
+
+console.log(multiselect)
+
+{
+    street: 'status',
+    number: 'multiselect',
+    options: [
+        {
+            value: 'open',
+            count: 42
+        },
+        {
+            value: 'closed'
+        }
+    ]
+}
+```
+
+Catching validation errors:
+
+```javascript
+try {
+    const multiselect = SelectFilter.create({
+        key: 'status',
+        options: [
+            {
+                value: 'open',
+                count: 42
+            },
+            {
+                value: 'closed'
+            }
+        ]
+    })
+} catch (error) {
+    console.log(error.message)
+}
+
+'The field type should be a String'
+```
+
+You can also map the values:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const mappedResults = test.map((x) => x * 2)
+
+// Or you can do:
+const double = (x) => x * 2
+const mappedResults2 = test.map(double)
+
+console.log(mappedResults)
+
+{
+    a: 2,
+    b: 4,
+};
+```
+
+You can also filter the values:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const filteredResults = test.filter((x) => x === 1)
+
+// Or you can do:
+const onlyOne = (x) => x === 1
+const filteredResults2 = test.filter(onlyOne)
+
+console.log(filteredResults)
+
+{
+    a: 1,
+};
+```
+
+You can also use every:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const everythingIsBelowThree = test.every((x) => x < 3)
+
+// Or you can do:
+const isBelowThree = (x) => x < 3
+const everythingIsBelowThree2 = test.every(isBelowThree)
+
+console.log(everythingIsBelowThree)
+
+true
+```
+
+You can also use some:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const someAreTwo = test.some((x) => x === 2)
+
+// Or you can do:
+const isTwo = (x) => x === 2
+const someAreTwo2 = test.some(isTwo)
+
+console.log(someAreTwo)
+
+true
 ```
 
 Example usage without a schema:
@@ -170,6 +367,72 @@ flatter.getFlatKeys(['a', 'c', 'd.e', 'g.h'])
     'd.e': 5,
     'g.h.i': 7,
 }
+```
+
+And you can also use the map method:
+```javascript
+
+flatter.flatMap((x) => x * 2)
+
+{
+    a: 2,
+    b: 4,
+    'c.0': 6,
+    'c.1': 8,
+    'd.e': 10,
+    'd.f': 12,
+    'g.h.i': 14,
+};
+```
+
+And you can also use the flatFilter method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatFilter((x) => x === 1)
+
+{
+    a: 1,
+    'c.0': 1,
+    'd.e': 1,
+    'g.h.i': 1,
+};
+```
+
+And you can also use the flatEvery method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatEvery((x) => x < 3)
+
+true
+```
+
+And you can also use the flatSome method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatSome((x) => x === 2)
+
+true
 ```
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects

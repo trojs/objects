@@ -292,6 +292,134 @@ const ObjectGenerator = ({ schema } = {}) =>
             );
         }
 
+        /**
+         * The map() method creates a new object populated with the results of
+         * calling a provided function on every element in the original object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        map(callbackFunction) {
+            return Object.fromEntries(
+                Object.entries(this.original).map(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The filter() method creates a new object with all elements
+         * that pass the test implemented by the provided function.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        filter(callbackFunction) {
+            return Object.fromEntries(
+                Object.entries(this.original).filter(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The every() method tests whether all elements in the object pass the
+         * test implemented by the provided function.
+         * It returns a Boolean value.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {boolean}
+         */
+        every(callbackFunction) {
+            return Object.values(this.original).every((value) =>
+                callbackFunction(value)
+            );
+        }
+
+        /**
+         * The some() method tests whether at least one element in the object
+         * passes the test implemented by the provided function.
+         * It returns true if, in the object, it finds an element for which the
+         * provided function returns true; otherwise it returns false.
+         * It doesn't modify the object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {boolean}
+         */
+        some(callbackFunction) {
+            return Object.values(this.original).some((value) =>
+                callbackFunction(value)
+            );
+        }
+
+        /**
+         * The flatMap() method creates a new object populated with the results
+         * of calling a provided function on every element in the flat object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        flatMap(callbackFunction) {
+            return Object.fromEntries(
+                this.entries().map(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The flatFilter() method creates a new object with all elements
+         * that pass the test implemented by the provided function.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        flatFilter(callbackFunction) {
+            return Object.fromEntries(
+                this.entries().filter(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The every() method tests whether all elements in the object pass the
+         * test implemented by the provided function.
+         * It returns a Boolean value.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {boolean}
+         */
+        flatEvery(callbackFunction) {
+            return this.values().every((value) => callbackFunction(value));
+        }
+
+        /**
+         * The some() method tests whether at least one element in the object
+         * passes the test implemented by the provided function.
+         * It returns true if, in the object, it finds an element for which the
+         * provided function returns true; otherwise it returns false.
+         * It doesn't modify the object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {boolean}
+         */
+        flatSome(callbackFunction) {
+            return this.values().some((value) => callbackFunction(value));
+        }
+
         static create(data) {
             const obj = new Obj(data);
 
@@ -312,6 +440,16 @@ const ObjectGenerator = ({ schema } = {}) =>
                 getFlatKeys: (keys, defaultValue) =>
                     obj.getFlatKeys(keys, defaultValue),
                 includes: (key) => obj.includes(key),
+                map: (callbackFunction) => obj.map(callbackFunction),
+                flatMap: (callbackFunction) => obj.flatMap(callbackFunction),
+                filter: (callbackFunction) => obj.filter(callbackFunction),
+                flatFilter: (callbackFunction) =>
+                    obj.flatFilter(callbackFunction),
+                every: (callbackFunction) => obj.every(callbackFunction),
+                flatEvery: (callbackFunction) =>
+                    obj.flatEvery(callbackFunction),
+                some: (callbackFunction) => obj.some(callbackFunction),
+                flatSome: (callbackFunction) => obj.flatSome(callbackFunction),
             });
         }
     };
