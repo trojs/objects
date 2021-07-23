@@ -1,8 +1,10 @@
-# Hack JavaScript objects
+# Create valid JavaScript objects
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 
-Get a flat version of the object
+Create objects and validate the values, so you know all values are ok.
+You don't have to create code to validate all fields of an object, just write a schema.
+Also get more usefull methods to work with objects.
 
 ## Installation
 
@@ -16,10 +18,16 @@ or
 or
 `yarn test`
 
+## Validation
+
+For validation, it use the package `@hckrnews/validation` (https://github.com/hckrnews/validator)
+
 ## Usage
 
 Example usage:
 ```javascript
+import Obj from '@hckrnews/objects'
+
 const addressSchema = {
     street: String,
     number: Number,
@@ -47,6 +55,82 @@ console.log(myAddress)
     city: 'Example',
     country: 'The Netherlands'
 }
+```
+
+You can also define sub schemas:
+
+```javascript
+import Obj from '@hckrnews/objects'
+
+const filterSchema = {
+  key: String,
+  type: String
+}
+
+const optionSchema = {
+  value: String,
+  'count?': Number
+}
+
+const selectFilterSchema = {
+  ...filterSchema,
+  options: optionSchema
+}
+
+const SelectFilter = Obj({ schema: selectFilterSchema })
+
+const multiselect = SelectFilter.create({
+    key: 'status',
+    type: 'multiselect',
+    options: [
+        {
+            value: 'open',
+            count: 42
+        },
+        {
+            value: 'closed'
+        }
+    ]
+})
+
+console.log(multiselect)
+
+{
+    street: 'status',
+    number: 'multiselect',
+    options: [
+        {
+            value: 'open',
+            count: 42
+        },
+        {
+            value: 'closed'
+        }
+    ]
+}
+```
+
+Catching validation errors:
+
+```javascript
+try {
+    const multiselect = SelectFilter.create({
+        key: 'status',
+        options: [
+            {
+                value: 'open',
+                count: 42
+            },
+            {
+                value: 'closed'
+            }
+        ]
+    })
+} catch (error) {
+    console.log(error.message)
+}
+
+'The field type should be a String'
 ```
 
 Example usage without a schema:
