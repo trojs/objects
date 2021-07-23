@@ -301,12 +301,11 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @return {object}
          */
         map(callbackFunction) {
-            return Object.entries(this.original).reduce(
-                (accumulator, [key, value]) => {
-                    accumulator[key] = callbackFunction(value);
-                    return accumulator;
-                },
-                {}
+            return Object.fromEntries(
+                Object.entries(this.original).map(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
             );
         }
 
