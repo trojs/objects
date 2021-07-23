@@ -319,10 +319,9 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         filter(callbackFunction) {
             return Object.fromEntries(
-                Object.entries(this.original).filter(([key, value]) => [
-                    key,
-                    callbackFunction(value),
-                ])
+                Object.entries(this.original).filter(
+                    ([key, value]) => key && callbackFunction(value)
+                )
             );
         }
 
@@ -385,10 +384,9 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         flatFilter(callbackFunction) {
             return Object.fromEntries(
-                this.entries().filter(([key, value]) => [
-                    key,
-                    callbackFunction(value),
-                ])
+                this.entries().filter(
+                    ([key, value]) => key && callbackFunction(value)
+                )
             );
         }
 
