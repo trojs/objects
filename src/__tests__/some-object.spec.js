@@ -6,6 +6,7 @@ const testSchema = {
     b: Number,
 };
 
+//  deepcode ignore ExpectsArray: False error, it should allow an object
 const Test = Obj({ schema: testSchema });
 
 describe('Test objects.js every', () => {
