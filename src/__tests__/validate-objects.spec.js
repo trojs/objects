@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-new */
 import { expect, describe, it } from '@jest/globals';
 import Obj from '../objects';
@@ -16,7 +17,9 @@ describe('Object test', () => {
         'obj?': 'object|string',
     };
 
+    //  deepcode ignore ExpectsArray: False error, it should allow an object
     const Address = Obj({ schema: addressSchema });
+    //  deepcode ignore ExpectsArray: False error, it should allow an object
     const Test = Obj({ schema: test1Schema });
     const test2 = new Test2('me');
 
