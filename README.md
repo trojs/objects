@@ -163,6 +163,35 @@ console.log(mappedResults)
 };
 ```
 
+You can also filter the values:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const mappedResults = test.filter((x) => x === 1)
+
+// Or you can do:
+const onlyOne = (x) => x === 1
+const mappedResults2 = test.filter(onlyOne)
+
+console.log(mappedResults)
+
+{
+    a: 1,
+};
+```
+
 Example usage without a schema:
 ...
 
@@ -288,13 +317,8 @@ flatter.getFlatKeys(['a', 'c', 'd.e', 'g.h'])
 
 And you can also use the map method:
 ```javascript
-flatter.flatMap({
-    a: 1,
-    b: 2,
-    c: [3, 4],
-    d: { e: 5, f: 6 },
-    g: { h: { i: 7 } },
-})
+
+flatter.flatMap((x) => x * 2)
 
 {
     a: 2,
@@ -304,6 +328,26 @@ flatter.flatMap({
     'd.e': 10,
     'd.f': 12,
     'g.h.i': 14,
+};
+```
+
+And you can also use the flatFilter method:
+```javascript
+const flatter = Obj().create({
+    a: 1,
+    b: 2,
+    c: [1, 2],
+    d: { e: 1, f: 2 },
+    g: { h: { i: 1 } }
+})
+
+flatter.flatFilter((x) => x === 1)
+
+{
+    a: 1,
+    'c.0': 1,
+    'd.e': 1,
+    'g.h.i': 1,
 };
 ```
 

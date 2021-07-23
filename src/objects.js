@@ -310,8 +310,25 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         /**
-         * The map() method creates a new object populated with the results of
-         * calling a provided function on every element in the flat object.
+         * The filter() method creates a new object with all elements
+         * that pass the test implemented by the provided function.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        filter(callbackFunction) {
+            return Object.fromEntries(
+                Object.entries(this.original).filter(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The flatMap() method creates a new object populated with the results
+         * of calling a provided function on every element in the flat object.
          *
          * @param {Function} callbackFunction
          *
@@ -320,6 +337,23 @@ const ObjectGenerator = ({ schema } = {}) =>
         flatMap(callbackFunction) {
             return Object.fromEntries(
                 this.entries().map(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
+        /**
+         * The flatFilter() method creates a new object with all elements
+         * that pass the test implemented by the provided function.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        flatFilter(callbackFunction) {
+            return Object.fromEntries(
+                this.entries().filter(([key, value]) => [
                     key,
                     callbackFunction(value),
                 ])
@@ -348,6 +382,9 @@ const ObjectGenerator = ({ schema } = {}) =>
                 includes: (key) => obj.includes(key),
                 map: (callbackFunction) => obj.map(callbackFunction),
                 flatMap: (callbackFunction) => obj.flatMap(callbackFunction),
+                filter: (callbackFunction) => obj.filter(callbackFunction),
+                flatFilter: (callbackFunction) =>
+                    obj.flatFilter(callbackFunction),
             });
         }
     };
