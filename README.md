@@ -133,6 +133,36 @@ try {
 'The field type should be a String'
 ```
 
+You can also map the values:
+```javascript
+const testSchema = {
+    a: Number,
+    b: Number,
+};
+
+const Test = Obj({ schema: testSchema });
+
+const input = {
+    a: 1,
+    b: 2,
+};
+
+const test = Test.create(input)
+
+const mappedResults = test.map((x) => x * 2)
+
+// Or you can do:
+const double = (x) => x * 2
+const mappedResults2 = test.map(double)
+
+console.log(mappedResults)
+
+{
+    a: 2,
+    b: 4,
+};
+```
+
 Example usage without a schema:
 ...
 
@@ -254,6 +284,27 @@ flatter.getFlatKeys(['a', 'c', 'd.e', 'g.h'])
     'd.e': 5,
     'g.h.i': 7,
 }
+```
+
+And you can also use the map method:
+```javascript
+flatter.flatMap({
+    a: 1,
+    b: 2,
+    c: [3, 4],
+    d: { e: 5, f: 6 },
+    g: { h: { i: 7 } },
+})
+
+{
+    a: 2,
+    b: 4,
+    'c.0': 6,
+    'c.1': 8,
+    'd.e': 10,
+    'd.f': 12,
+    'g.h.i': 14,
+};
 ```
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects

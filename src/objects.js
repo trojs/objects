@@ -292,6 +292,41 @@ const ObjectGenerator = ({ schema } = {}) =>
             );
         }
 
+        /**
+         * The map() method creates a new object populated with the results of
+         * calling a provided function on every element in the original object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        map(callbackFunction) {
+            return Object.entries(this.original).reduce(
+                (accumulator, [key, value]) => {
+                    accumulator[key] = callbackFunction(value);
+                    return accumulator;
+                },
+                {}
+            );
+        }
+
+        /**
+         * The map() method creates a new object populated with the results of
+         * calling a provided function on every element in the flat object.
+         *
+         * @param {Function} callbackFunction
+         *
+         * @return {object}
+         */
+        flatMap(callbackFunction) {
+            return Object.fromEntries(
+                this.entries().map(([key, value]) => [
+                    key,
+                    callbackFunction(value),
+                ])
+            );
+        }
+
         static create(data) {
             const obj = new Obj(data);
 
@@ -312,6 +347,8 @@ const ObjectGenerator = ({ schema } = {}) =>
                 getFlatKeys: (keys, defaultValue) =>
                     obj.getFlatKeys(keys, defaultValue),
                 includes: (key) => obj.includes(key),
+                map: (callbackFunction) => obj.map(callbackFunction),
+                flatMap: (callbackFunction) => obj.flatMap(callbackFunction),
             });
         }
     };
