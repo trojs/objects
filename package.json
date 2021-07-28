@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.2.2",
+    "version": "3.3.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -18,7 +18,9 @@
     },
     "type": "module",
     "files": [
-        "src/objects.js"
+        "src/objects.js",
+        "src/parser.js",
+        "src/int.js"
     ],
     "main": "src/objects.js",
     "devDependencies": {

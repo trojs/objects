@@ -1,4 +1,6 @@
 import { Validator } from '@hckrnews/validator';
+import Parser from './parser';
+import Int from './int';
 
 /**
  * Object helper
@@ -22,9 +24,14 @@ const ObjectGenerator = ({ schema } = {}) =>
             if (schema) {
                 this.validate();
             }
-            this.parse();
+            this.parseObject();
         }
 
+        /**
+         * Get the sub schema, look e.g. for optional fields.
+         *
+         * @return {object}
+         */
         get subSchema() {
             if (!this.prefix) {
                 return schema;
@@ -58,18 +65,31 @@ const ObjectGenerator = ({ schema } = {}) =>
             return subSchema;
         }
 
+        /**
+         * Setup the validator with the subschema.
+         *
+         * @return {object|null}
+         */
         get validator() {
             return this.subSchema && this.subSchema.constructor === Object
                 ? new Validator(this.subSchema)
                 : null;
         }
 
+        /**
+         * Get the original data as array.
+         *
+         * @return {array}
+         */
         get originalData() {
             return this.original?.constructor === Array
                 ? this.original
                 : [this.original];
         }
 
+        /**
+         * Validate the original data.
+         */
         validate() {
             const { validator } = this;
 
@@ -106,7 +126,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         /**
          * flatten the object 1 level per time.
          */
-        parse() {
+        parseObject() {
             Object.entries(this.original).forEach(
                 ([originalRowIndex, originalRow]) => {
                     let index = originalRowIndex;
@@ -450,5 +470,18 @@ const ObjectGenerator = ({ schema } = {}) =>
                 flatSome: (callbackFunction) => obj.flatSome(callbackFunction),
             });
         }
+
+        /**
+         * Parse the data, so it converts all values to the given schema.
+         *
+         * @param {object} data
+         *
+         * @return {object}
+         */
+        static parse(data) {
+            const parser = new Parser({ schema });
+            return parser.parseObject(data);
+        }
     };
 export default ObjectGenerator;
+export { Parser, Int };
