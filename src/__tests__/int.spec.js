@@ -1,6 +1,6 @@
 /* eslint-disable no-new */
 import { expect, describe, it } from '@jest/globals';
-import Int from '../int';
+import Int from '../int.js';
 
 describe('Test int.js', () => {
     it('It should build a int', () => {

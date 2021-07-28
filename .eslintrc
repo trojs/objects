@@ -5,9 +5,21 @@
         "node": true,
         "browser": true
     },
+    "plugins": [
+        "import"
+    ],
     "extends": [
         "@hckrnews/eslint-config"
     ],
+    "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "always"
+            }
+        ]
+    },
     "parserOptions": {
         "sourceType": "module",
         "parser": "@babel/eslint-parser",

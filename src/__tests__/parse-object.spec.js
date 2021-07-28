@@ -1,6 +1,6 @@
 import { expect, describe, it } from '@jest/globals';
-import Obj from '../objects';
-import Int from '../int';
+import Obj from '../objects.js';
+import Int from '../int.js';
 
 const subSchema = {
     a: Number,

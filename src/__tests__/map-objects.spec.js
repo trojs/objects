@@ -1,5 +1,5 @@
 import { expect, describe, it } from '@jest/globals';
-import Obj from '../objects';
+import Obj from '../objects.js';
 
 const testSchema = {
     a: Number,
