@@ -248,6 +248,49 @@ console.log(someAreTwo)
 true
 ```
 
+If you have some data, and you have to transform the data to the schema, you can use the parse method.
+```javascript
+const subSchema = {
+    a: Number,
+    b: Boolean,
+    'c?': String,
+};
+
+const testSchema = {
+    a: Number,
+    b: Boolean,
+    'c?': String,
+    subSchema,
+};
+
+const Test = Obj({ schema: testSchema });
+
+
+const input = {
+    a: '42',
+    b: 'true',
+    c: 42,
+    subSchema: {
+        a: '42',
+        b: 'true',
+        c: 42,
+    },
+};
+
+Test.parse(input)
+
+{
+    a: 42,
+    b: true,
+    c: '42',
+    subSchema: {
+        a: 42,
+        b: true,
+        c: '42',
+    },
+};
+```
+
 Example usage without a schema:
 ...
 
