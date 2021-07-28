@@ -1,6 +1,6 @@
 import { Validator } from '@hckrnews/validator';
-import Parser from './parser';
-import Int from './int';
+import Parser from './parser.js';
+import Int from './int.js';
 
 /**
  * Object helper

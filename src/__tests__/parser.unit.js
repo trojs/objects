@@ -1,6 +1,6 @@
 /* eslint-disable no-new */
 import { expect, describe, it } from '@jest/globals';
-import Parser from '../parser';
+import Parser from '../parser.js';
 
 const testSchema = {
     a: Number,

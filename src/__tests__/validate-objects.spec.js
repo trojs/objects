@@ -1,9 +1,9 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-new */
 import { expect, describe, it } from '@jest/globals';
-import Obj from '../objects';
-import test1Schema from '../schemas/test1';
-import Test2 from '../schemas/test2';
+import Obj from '../objects.js';
+import test1Schema from '../schemas/test1.js';
+import Test2 from '../schemas/test2.js';
 
 describe('Object test', () => {
     const addressSchema = {
