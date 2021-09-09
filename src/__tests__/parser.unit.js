@@ -26,6 +26,23 @@ describe('Test parser.js', () => {
         });
     });
 
+    it('It should parse the undefined values', () => {
+        const input = {
+            a: undefined,
+            b: undefined,
+            c: undefined,
+            d: undefined,
+        };
+        const parse = new Parser({ schema: testSchema });
+
+        expect(parse.parseObject(input)).toEqual({
+            a: undefined,
+            b: undefined,
+            c: undefined,
+            d: undefined,
+        });
+    });
+
     it('It should parse the nullish values', () => {
         const input = {
             a: null,
