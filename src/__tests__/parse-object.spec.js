@@ -124,7 +124,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input, true)).toEqual({
+        expect(Test.parse(input, { validate: true })).toEqual({
             a: 1,
             b: true,
             c: '42',
