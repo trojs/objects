@@ -76,7 +76,7 @@ describe('Test objects.js parse', () => {
         const input = {
             a: '1',
             b: 'true',
-            c: 3,
+            c: null,
             subSchema: {
                 a: '1',
                 b: 'true',
@@ -86,7 +86,7 @@ describe('Test objects.js parse', () => {
         expect(Test.parse(input)).toEqual({
             a: 1,
             b: true,
-            c: '3',
+            c: null,
             subSchema: {
                 a: 1,
                 b: true,
