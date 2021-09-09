@@ -59,6 +59,10 @@ export default class Parser {
     parse([key, value]) {
         const Type = this.getFieldType({ key });
 
+        if (value === undefined || value === null) {
+            return [key, value];
+        }
+
         if (Type?.constructor === Object) {
             const subParser = new Parser({ schema: Type });
             return [key, subParser.parseObject(value)];

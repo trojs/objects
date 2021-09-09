@@ -25,4 +25,21 @@ describe('Test parser.js', () => {
             d: 'test',
         });
     });
+
+    it('It should parse the nullish values', () => {
+        const input = {
+            a: null,
+            b: null,
+            c: null,
+            d: null,
+        };
+        const parse = new Parser({ schema: testSchema });
+
+        expect(parse.parseObject(input)).toEqual({
+            a: null,
+            b: null,
+            c: null,
+            d: null,
+        });
+    });
 });
