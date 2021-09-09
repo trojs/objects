@@ -114,24 +114,24 @@ describe('Test objects.js parse', () => {
 
     it('It should validate the object', () => {
         const input = {
-            a: '1',
+            a: '101',
             b: 'true',
-            c: 42,
+            c: 102,
             subSchema: {
-                a: '1',
+                a: '103',
                 b: 'true',
-                c: 'test',
+                c: 'test with validation',
             },
         };
 
         expect(Test.parse(input, { validate: true })).toEqual({
-            a: 1,
+            a: 101,
             b: true,
-            c: '42',
+            c: '102',
             subSchema: {
-                a: 1,
+                a: 103,
                 b: true,
-                c: 'test',
+                c: 'test with validation',
             },
         });
     });
