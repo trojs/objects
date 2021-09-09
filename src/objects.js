@@ -1,6 +1,7 @@
 import { Validator } from '@hckrnews/validator';
 import Parser from './parser.js';
 import Int from './int.js';
+import ParseOptionsSchema from './schemas/parse-options.js';
 
 /**
  * Object helper
@@ -475,12 +476,23 @@ const ObjectGenerator = ({ schema } = {}) =>
          * Parse the data, so it converts all values to the given schema.
          *
          * @param {object} data
+         * @param {object} options
          *
          * @return {object}
          */
-        static parse(data) {
+        static parse(data, options = {}) {
+            const ParseOptions = ObjectGenerator({
+                schema: ParseOptionsSchema,
+            });
+            const parseOptions = ParseOptions.create(options);
             const parser = new Parser({ schema });
-            return parser.parseObject(data);
+            const parsed = parser.parseObject(data);
+
+            if (parseOptions?.validate) {
+                return Obj.create(parsed);
+            }
+
+            return parsed;
         }
     };
 export default ObjectGenerator;

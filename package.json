@@ -18,6 +18,7 @@
     },
     "type": "module",
     "files": [
+        "src/schemas/parse-options.js",
         "src/objects.js",
         "src/parser.js",
         "src/int.js"
