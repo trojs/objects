@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.3.4",
+    "version": "3.3.5",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -14,7 +14,7 @@
         "test:watch": "jest src --watch",
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "cpd": "node_modules/jscpd/bin/jscpd src",
-        "vulnerabilities": "npm audit --json | npm-audit-helper --prod-only"
+        "vulnerabilities": "npm audit"
     },
     "type": "module",
     "files": [
@@ -30,8 +30,8 @@
         "@babel/plugin-transform-modules-commonjs": "^7.14.0",
         "@babel/preset-env": "^7.9.5",
         "@hckrnews/eslint-config": "^2.0.0",
-        "@jest/globals": "^27.0.6",
-        "babel-jest": "^27.0.6",
+        "@jest/globals": "^27.2.4",
+        "babel-jest": "^27.2.4",
         "codecov": "^3.6.5",
         "coveralls": "^3.0.13",
         "eslint": "^7.24.0",
@@ -41,10 +41,8 @@
         "eslint-plugin-import": "^2.23.4",
         "eslint-plugin-jsx-a11y": "^6.4.1",
         "eslint-plugin-prettier": "^3.3.1",
-        "jest": "^27.0.6",
+        "jest": "^27.2.4",
         "jscpd": "^3.2.1",
-        "microbundle": "^0.13.0",
-        "npm-audit-helper": "^3.1.0",
         "prettier": "^2.2.1"
     },
     "repository": {
