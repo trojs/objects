@@ -17,4 +17,6 @@ module.exports = {
 
     collectCoverage: true,
     collectCoverageFrom: ['src/**/*.js'],
+
+    testResultsProcessor: 'jest-sonar-reporter',
 };
