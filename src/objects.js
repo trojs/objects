@@ -388,9 +388,9 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         flatMap(callbackFunction) {
             return Object.fromEntries(
-                this.entries().map(([key, value]) => [
-                    key,
-                    callbackFunction(value),
+                this.entries().map(([entryKey, entryValue]) => [
+                    entryKey,
+                    callbackFunction(entryValue),
                 ])
             );
         }
