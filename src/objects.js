@@ -88,6 +88,18 @@ const ObjectGenerator = ({ schema } = {}) =>
                 : [this.original];
         }
 
+        subValidator({ field, type, data }) {
+            const subData = data[field];
+            const subValidator = new Validator(type);
+            subValidator.validate(subData);
+            const [subField, subType] = subValidator.errors[0];
+            const subTypeName =
+                subType?.constructor === String ? subType : subType.name;
+            throw new Error(
+                `The field ${field}.${subField} should be a ${subTypeName}`
+            );
+        }
+
         /**
          * Validate the original data.
          */
@@ -106,15 +118,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                             `The field ${field} should be a ${type}`
                         );
                     } else if (type?.constructor === Object) {
-                        const subTypes = Object.entries(type);
-                        const [subField, subType] = subTypes[0];
-                        const subTypeName =
-                            subType?.constructor === String
-                                ? subType
-                                : subType.name;
-                        throw new Error(
-                            `The field ${field}.${subField} should be a ${subTypeName}`
-                        );
+                        this.subValidator({ field, type, data });
                     } else {
                         throw new Error(
                             `The field ${field} should be a ${type.name}`
