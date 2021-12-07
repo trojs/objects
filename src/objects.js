@@ -88,15 +88,27 @@ const ObjectGenerator = ({ schema } = {}) =>
                 : [this.original];
         }
 
-        subValidator({ field, type, data }) {
+        subValidator({ field, type, data, parent = '' }) {
+            const path = [parent, field].filter((item) => item).join('.');
             const subData = data[field];
             const subValidator = new Validator(type);
             subValidator.validate(subData);
             const [subField, subType] = subValidator.errors[0];
+
+            if (subType?.constructor === Object) {
+                this.subValidator({
+                    field: subField,
+                    type: subType,
+                    data: subData,
+                    parent: path,
+                });
+            }
+
             const subTypeName =
                 subType?.constructor === String ? subType : subType.name;
+
             throw new Error(
-                `The field ${field}.${subField} should be a ${subTypeName}`
+                `The field ${path}.${subField} should be a ${subTypeName}`
             );
         }
 
