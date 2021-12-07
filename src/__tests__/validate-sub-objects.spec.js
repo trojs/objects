@@ -5,7 +5,7 @@ describe('Object test', () => {
     const CountrySchema = {
         name: String,
         code: String,
-        active: Boolean
+        active: Boolean,
     };
 
     const addressSchema = {
@@ -13,7 +13,7 @@ describe('Object test', () => {
         number: 'number',
         postalCode: String,
         city: String,
-        country: CountrySchema
+        country: CountrySchema,
     };
 
     //  deepcode ignore ExpectsArray: False error, it should allow an object
@@ -29,7 +29,7 @@ describe('Object test', () => {
                 country: {
                     name: 'Germany',
                     code: 'DE',
-                    active: 'true'
+                    active: 'true',
                 },
             });
         }).toThrowError('The field country.active should be a Boolean');
