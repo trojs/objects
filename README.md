@@ -1,6 +1,6 @@
 # Create valid JavaScript objects
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url] [![Quality Gate Status][sonarcloud-quality-image]][sonarcloud-url]
 
 Create objects and validate the values, so you know all values are ok.
 You don't have to create code to validate all fields of an object, just write a schema.
@@ -488,3 +488,5 @@ true
 [coveralls-image]: https://img.shields.io/coveralls/hckrnews/objects/master.svg
 [scrutinizer-url]: https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
 [scrutinizer-image]: https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
+[sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=hckrnews_objects
+[sonarcloud-quality-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=alert_statu
