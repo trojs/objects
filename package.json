@@ -8,7 +8,8 @@
     },
     "license": "LGPL-3.0",
     "scripts": {
-        "lint": "eslint src/*.js --config .eslintrc -f json -o report.json",
+        "lint": "eslint src/*.js --config .eslintrc",
+        "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "jest",
         "test:watch": "jest src --watch",
