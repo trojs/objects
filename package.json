@@ -1,14 +1,15 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.3.10",
+    "version": "3.3.11",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
     },
     "license": "LGPL-3.0",
     "scripts": {
-        "lint": "eslint src/*.js --config .eslintrc -f json -o report.json",
+        "lint": "eslint src/*.js --config .eslintrc",
+        "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "jest",
         "test:watch": "jest src --watch",

@@ -18,24 +18,24 @@ describe('Object test', () => {
 
     const personSchema = {
         name: String,
-        address: addressSchema
+        address: addressSchema,
     };
 
     it('It should throw an exception for level 1', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
-        const Country = Obj({ schema: CountrySchema })
+        const Country = Obj({ schema: CountrySchema });
         expect(() => {
             Country.create({
-                    name: 'Germany',
-                    code: 'DE',
-                    active: 'true',
-            })
-        }).toThrowError('The field active should be a Boolean')
+                name: 'Germany',
+                code: 'DE',
+                active: 'true',
+            });
+        }).toThrowError('The field active should be a Boolean');
     });
 
     it('It should throw an exception for level 2', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
-        const Address = Obj({ schema: addressSchema })
+        const Address = Obj({ schema: addressSchema });
         expect(() => {
             Address.create({
                 street: 'Abc',
@@ -47,13 +47,13 @@ describe('Object test', () => {
                     code: 'DE',
                     active: 'true',
                 },
-            })
-        }).toThrowError('The field country.active should be a Boolean')
+            });
+        }).toThrowError('The field country.active should be a Boolean');
     });
 
     it('It should throw an exception for level 3', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
-        const Person = Obj({ schema: personSchema })
+        const Person = Obj({ schema: personSchema });
         expect(() => {
             Person.create({
                 name: 'John',
@@ -68,7 +68,7 @@ describe('Object test', () => {
                         active: 'true',
                     },
                 },
-            })
-        }).toThrowError('The field address.country.active should be a Boolean')
+            });
+        }).toThrowError('The field address.country.active should be a Boolean');
     });
 });
