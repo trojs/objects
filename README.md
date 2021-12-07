@@ -1,6 +1,8 @@
 # Create valid JavaScript objects
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url] [![Quality Gate Status][sonarcloud-quality-image]][sonarcloud-url]
+[![NPM version][npm-image]][npm-url] [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url] [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects)
 
 Create objects and validate the values, so you know all values are ok.
 You don't have to create code to validate all fields of an object, just write a schema.
@@ -482,11 +484,5 @@ true
 
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects
 [npm-image]: https://img.shields.io/npm/v/@hckrnews/objects.svg
-[travis-url]: https://travis-ci.org/hckrnews/objects
-[travis-image]: https://img.shields.io/travis/hckrnews/objects/master.svg
-[coveralls-url]: https://coveralls.io/r/hckrnews/objects
-[coveralls-image]: https://img.shields.io/coveralls/hckrnews/objects/master.svg
 [scrutinizer-url]: https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
 [scrutinizer-image]: https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
-[sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=hckrnews_objects
-[sonarcloud-quality-image]: https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=alert_statu
