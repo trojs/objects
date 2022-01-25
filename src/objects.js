@@ -357,7 +357,8 @@ const ObjectGenerator = ({ schema } = {}) =>
         filter(callbackFunction) {
             return Object.fromEntries(
                 Object.entries(this.original).filter(
-                    ([key, value]) => key && callbackFunction(value, key, this.original)
+                    ([key, value]) =>
+                        key && callbackFunction(value, key, this.original)
                 )
             );
         }
