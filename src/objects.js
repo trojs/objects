@@ -341,7 +341,7 @@ const ObjectGenerator = ({ schema } = {}) =>
             return Object.fromEntries(
                 Object.entries(this.original).map(([key, value]) => [
                     key,
-                    callbackFunction(value),
+                    callbackFunction(value, key, this.original),
                 ])
             );
         }
