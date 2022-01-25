@@ -47,4 +47,40 @@ describe('Test objects.js map', () => {
             expectedResult
         );
     });
+
+    it('It should use the key of the map', () => {
+        const input = {
+            a: 1,
+            b: 2,
+        };
+        const expectedResult = {
+            a: 'a',
+            b: 'b',
+        };
+
+        expect(Test.create(input).map((x, y) => y)).toMatchObject(
+            expectedResult
+        );
+    });
+
+    it('It should use the original result of the map', () => {
+        const input = {
+            a: 1,
+            b: 2,
+        };
+        const expectedResult = {
+            a: {
+                a: 1,
+                b: 2,
+            },
+            b: {
+                a: 1,
+                b: 2,
+            },
+        };
+
+        expect(Test.create(input).map((x, y, z) => z)).toMatchObject(
+            expectedResult
+        );
+    });
 });
