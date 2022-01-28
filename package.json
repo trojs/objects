@@ -15,7 +15,7 @@
         "test:watch": "jest src --watch",
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "cpd": "node_modules/jscpd/bin/jscpd src",
-        "vulnerabilities": "npm audit --only=prod"
+        "vulnerabilities": "npm audit --production"
     },
     "type": "module",
     "files": [
