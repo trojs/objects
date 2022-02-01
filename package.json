@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.5.0",
+    "version": "3.6.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -15,7 +15,7 @@
         "test:watch": "jest src --watch",
         "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "cpd": "node_modules/jscpd/bin/jscpd src",
-        "vulnerabilities": "npm audit --only=prod"
+        "vulnerabilities": "npm audit --production"
     },
     "type": "module",
     "files": [
@@ -35,7 +35,7 @@
         "babel-jest": "^27.2.4",
         "codecov": "^3.6.5",
         "coveralls": "^3.0.13",
-        "eslint": "^8.3.0",
+        "eslint": "^8.8.0",
         "eslint-config-airbnb": "^19.0.1",
         "eslint-config-prettier": "^8.2.0",
         "eslint-plugin-html": "^6.1.2",
