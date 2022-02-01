@@ -482,6 +482,9 @@ flatter.flatSome((x) => x === 2)
 true
 ```
 
+For arrays you can also use `createAll` and `parseAll`.
+It works the same as `create` and `parse` but it can do it on every item in an array.
+
 [npm-url]: https://www.npmjs.com/package/@hckrnews/objects
 [npm-image]: https://img.shields.io/npm/v/@hckrnews/objects.svg
 [scrutinizer-url]: https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master

@@ -490,6 +490,17 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         /**
+         * Create for every item in the array an anvancd object.
+         *
+         * @param {Array} data
+         *
+         * @return {Array}
+         */
+        static createAll(data) {
+            return data.map((item) => Obj.create(item));
+        }
+
+        /**
          * Parse the data, so it converts all values to the given schema.
          *
          * @param {object} data
@@ -510,6 +521,17 @@ const ObjectGenerator = ({ schema } = {}) =>
             }
 
             return parsed;
+        }
+
+        /**
+         * Parse every item in the array.
+         *
+         * @param {Array} data
+         *
+         * @return {Array}
+         */
+        static parseAll(data) {
+            return data.map((item) => Obj.parse(item));
         }
     };
 export default ObjectGenerator;
