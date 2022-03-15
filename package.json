@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.6.0",
+    "version": "3.6.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
