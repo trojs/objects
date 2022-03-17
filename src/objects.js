@@ -94,7 +94,7 @@ const ObjectGenerator = ({ schema } = {}) =>
             const subValidator = new Validator(type);
             subValidator.validate(subData);
             const [subField, subType] = subValidator.errors[0];
-            const invalidData = subData[subField];
+            const invalidData = subData?.[subField];
 
             if (subType?.constructor === Object) {
                 this.subValidator({
@@ -126,7 +126,7 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
                     const [field, type] = validator.errors[0];
-                    const invalidData = data[field];
+                    const invalidData = data?.[field];
 
                     if (type?.constructor === String) {
                         throw new Error(
