@@ -38,9 +38,6 @@ const dataToString = ({ data, parentData, field, parentField }) => {
         field: fieldName,
         parentField: parentFieldName,
     });
-    if (value?.constructor === Number || value?.constructor === Boolean) {
-        return value;
-    }
 
     return JSON.stringify(value);
 };
