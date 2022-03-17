@@ -68,7 +68,7 @@ describe('Object test', () => {
                 city: 'Example',
                 country: 'The Netherlands',
             });
-        }).toThrowError('The field number should be a number');
+        }).toThrowError('The field number should be a number ("xyz")');
     });
 
     it('It should throw an exception', () => {
@@ -79,7 +79,7 @@ describe('Object test', () => {
                 postalCode: '1234AB',
                 city: 'Example',
             });
-        }).toThrowError('The field country should be a String');
+        }).toThrowError('The field country should be a String (undefined)');
     });
 
     it('It should valid with this custom optional type', () => {
@@ -197,7 +197,7 @@ describe('Object test', () => {
                 test: test2,
                 test4: true,
             });
-        }).toThrowError('The field test4? should be a string|number');
+        }).toThrowError('The field test4? should be a string|number (true)');
     });
 
     it('It should throw an exception if the custom type is invalid', () => {
@@ -206,7 +206,7 @@ describe('Object test', () => {
                 name: 'test',
                 test: 'test',
             });
-        }).toThrowError('The field ?test should be a Test2');
+        }).toThrowError('The field ?test should be a Test2 ("test")');
     });
 
     it('It should throw an exception if the sub schema is invalid', () => {
@@ -215,7 +215,7 @@ describe('Object test', () => {
                 name: 'test',
                 test3: 'test',
             });
-        }).toThrowError('The field test3?.example should be a String');
+        }).toThrowError('The field test3?.example should be a String (undefined)');
     });
 
     it('It should throw an exception if the custom type is invalid', () => {
@@ -224,7 +224,7 @@ describe('Object test', () => {
                 name: 'test',
                 obj: 'test',
             });
-        }).toThrowError('The field obj? should be a Object');
+        }).toThrowError('The field obj? should be a Object ("test")');
     });
 
     it('It should throw an exception if the custom type is invalid', () => {
@@ -233,7 +233,7 @@ describe('Object test', () => {
                 name: 'test',
                 test3: [{ example: 42 }],
             });
-        }).toThrowError('The field test3?.example should be a String');
+        }).toThrowError('The field test3?.example should be a String (42)');
     });
 
     it('It should throw an exception if the custom type is invalid', () => {
@@ -242,6 +242,6 @@ describe('Object test', () => {
                 name: 'test',
                 test5: [{ example: 42 }],
             });
-        }).toThrowError('The field ?test5.example should be a string');
+        }).toThrowError('The field ?test5.example should be a string (42)');
     });
 });

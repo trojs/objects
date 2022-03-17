@@ -30,7 +30,7 @@ describe('Object test', () => {
                 code: 'DE',
                 active: 'true',
             });
-        }).toThrowError('The field active should be a Boolean (true)');
+        }).toThrowError('The field active should be a Boolean ("true")');
     });
 
     it('It should throw an exception for level 2', () => {
@@ -48,7 +48,7 @@ describe('Object test', () => {
                     active: 'true',
                 },
             });
-        }).toThrowError('The field country.active should be a Boolean (true)');
+        }).toThrowError('The field country.active should be a Boolean ("true")');
     });
 
     it('It should throw an exception for level 3', () => {
@@ -69,6 +69,6 @@ describe('Object test', () => {
                     },
                 },
             });
-        }).toThrowError('The field address.country.active should be a Boolean (true)');
+        }).toThrowError('The field address.country.active should be a Boolean ("true")');
     });
 });
