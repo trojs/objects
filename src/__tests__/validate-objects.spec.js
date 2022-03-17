@@ -215,7 +215,9 @@ describe('Object test', () => {
                 name: 'test',
                 test3: 'test',
             });
-        }).toThrowError('The field test3?.example should be a String (undefined)');
+        }).toThrowError(
+            'The field test3?.example should be a String (undefined)'
+        );
     });
 
     it('It should throw an exception if the custom type is invalid', () => {
