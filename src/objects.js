@@ -94,6 +94,7 @@ const ObjectGenerator = ({ schema } = {}) =>
             const subValidator = new Validator(type);
             subValidator.validate(subData);
             const [subField, subType] = subValidator.errors[0];
+            const invalidData = subData[subField];
 
             if (subType?.constructor === Object) {
                 this.subValidator({
@@ -108,7 +109,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                 subType?.constructor === String ? subType : subType.name;
 
             throw new Error(
-                `The field ${path}.${subField} should be a ${subTypeName} (${subData})`
+                `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`
             );
         }
 
@@ -125,15 +126,17 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
                     const [field, type] = validator.errors[0];
+                    const invalidData = data[field];
+
                     if (type?.constructor === String) {
                         throw new Error(
-                            `The field ${field} should be a ${type} (${data})`
+                            `The field ${field} should be a ${type} (${invalidData})`
                         );
                     } else if (type?.constructor === Object) {
                         this.subValidator({ field, type, data });
                     } else {
                         throw new Error(
-                            `The field ${field} should be a ${type.name} (${data})`
+                            `The field ${field} should be a ${type.name} (${invalidData})`
                         );
                     }
                 }
