@@ -3,6 +3,45 @@ import Parser from './parser.js';
 import Int from './int.js';
 import ParseOptionsSchema from './schemas/parse-options.js';
 
+const getFieldName = (field) => {
+    if (!field) {
+        return field;
+    }
+
+    if (field.substr(0, 1) === '?') {
+        return field.substr(1);
+    }
+
+    if (field.substr(-1, 1) === '?') {
+        return field.slice(0, -1);
+    }
+
+    return field;
+};
+
+const getValue = ({ data, parentData, field, parentField }) => {
+    const value = data?.[field];
+    const parentValue = parentData?.[parentField];
+    if (!value && parentValue?.constructor === Array) {
+        return parentValue[0]?.[field];
+    }
+
+    return value;
+};
+
+const dataToString = ({ data, parentData, field, parentField }) => {
+    const fieldName = getFieldName(field);
+    const parentFieldName = getFieldName(parentField);
+    const value = getValue({
+        data,
+        parentData,
+        field: fieldName,
+        parentField: parentFieldName,
+    });
+
+    return JSON.stringify(value);
+};
+
 /**
  * Object helper
  *
@@ -94,6 +133,12 @@ const ObjectGenerator = ({ schema } = {}) =>
             const subValidator = new Validator(type);
             subValidator.validate(subData);
             const [subField, subType] = subValidator.errors[0];
+            const invalidData = dataToString({
+                data: subData,
+                parentData: data,
+                field: subField,
+                parentField: field,
+            });
 
             if (subType?.constructor === Object) {
                 this.subValidator({
@@ -108,7 +153,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                 subType?.constructor === String ? subType : subType.name;
 
             throw new Error(
-                `The field ${path}.${subField} should be a ${subTypeName} (${subData})`
+                `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`
             );
         }
 
@@ -125,15 +170,17 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
                     const [field, type] = validator.errors[0];
+                    const invalidData = dataToString({ data, field });
+
                     if (type?.constructor === String) {
                         throw new Error(
-                            `The field ${field} should be a ${type} (${data})`
+                            `The field ${field} should be a ${type} (${invalidData})`
                         );
                     } else if (type?.constructor === Object) {
                         this.subValidator({ field, type, data });
                     } else {
                         throw new Error(
-                            `The field ${field} should be a ${type.name} (${data})`
+                            `The field ${field} should be a ${type.name} (${invalidData})`
                         );
                     }
                 }
