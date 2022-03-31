@@ -1,4 +1,5 @@
 import { Validator } from '@hckrnews/validator';
+import { ValidationError } from '@hckrnews/error';
 import Parser from './parser.js';
 import Int from './int.js';
 import ParseOptionsSchema from './schemas/parse-options.js';
@@ -152,9 +153,17 @@ const ObjectGenerator = ({ schema } = {}) =>
             const subTypeName =
                 subType?.constructor === String ? subType : subType.name;
 
-            throw new Error(
-                `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`
-            );
+            throw new ValidationError({
+                message: `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`,
+                value: {
+                    field: `${path}.${subField}`,
+                    type: subTypeName,
+                    invalidData,
+                    schema,
+                    data: this.original,
+                },
+                me: this.constructor,
+            });
         }
 
         /**
@@ -173,15 +182,31 @@ const ObjectGenerator = ({ schema } = {}) =>
                     const invalidData = dataToString({ data, field });
 
                     if (type?.constructor === String) {
-                        throw new Error(
-                            `The field ${field} should be a ${type} (${invalidData})`
-                        );
+                        throw new ValidationError({
+                            message: `The field ${field} should be a ${type} (${invalidData})`,
+                            value: {
+                                field,
+                                type,
+                                invalidData,
+                                schema,
+                                data: this.original,
+                            },
+                            me: this.constructor,
+                        });
                     } else if (type?.constructor === Object) {
                         this.subValidator({ field, type, data });
                     } else {
-                        throw new Error(
-                            `The field ${field} should be a ${type.name} (${invalidData})`
-                        );
+                        throw new ValidationError({
+                            message: `The field ${field} should be a ${type.name} (${invalidData})`,
+                            value: {
+                                field,
+                                type: type.name,
+                                invalidData,
+                                schema,
+                                data: this.original,
+                            },
+                            me: this.constructor,
+                        });
                     }
                 }
             });
