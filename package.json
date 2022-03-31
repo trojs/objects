@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "3.6.3",
+    "version": "4.0.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -59,6 +59,7 @@
         "flat"
     ],
     "dependencies": {
+        "@hckrnews/error": "^0.3.8",
         "@hckrnews/validator": "^5.0.4"
     }
 }
