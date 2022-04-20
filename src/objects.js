@@ -69,12 +69,16 @@ const ObjectGenerator = ({ schema } = {}) =>
         }
 
         get schemaToJSON() {
-            return JSON.stringify(schema, (key, value) => {
-                if (value.constructor === Function) {
-                  return value.name;
-                }
-                return value;
-            }, '\t')
+            return JSON.stringify(
+                schema,
+                (key, value) => {
+                    if (value.constructor === Function) {
+                        return value.name;
+                    }
+                    return value;
+                },
+                '\t'
+            );
         }
 
         /**
