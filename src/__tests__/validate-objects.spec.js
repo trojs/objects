@@ -57,17 +57,6 @@ describe('Object test', () => {
             'example',
             'obj.test',
         ]);
-
-        expect(myAddress.schemaToJSON).toBe(`{
-            "street": "String",
-    "number": "number",
-    "postalCode": "String",
-    "city": "String",
-    "country": "String",
-    "build": "Function",
-    "example?": "mixed",
-    "obj?": "object|string"
-}`);
     });
 
     it('It should throw an exception', () => {

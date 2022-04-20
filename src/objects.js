@@ -68,19 +68,6 @@ const ObjectGenerator = ({ schema } = {}) =>
             this.parseObject();
         }
 
-        get schemaToJSON() {
-            return JSON.stringify(
-                schema,
-                (key, value) => {
-                    if (value.constructor === Function) {
-                        return value.name;
-                    }
-                    return value;
-                },
-                '\t'
-            );
-        }
-
         /**
          * Get the sub schema, look e.g. for optional fields.
          *
@@ -173,7 +160,6 @@ const ObjectGenerator = ({ schema } = {}) =>
                     type: subTypeName,
                     invalidData,
                     data: this.original,
-                    schema: this.schemaToJSON,
                 },
                 me: this.constructor,
             });
@@ -202,7 +188,6 @@ const ObjectGenerator = ({ schema } = {}) =>
                                 type,
                                 invalidData,
                                 data: this.original,
-                                schema: this.schemaToJSON,
                             },
                             me: this.constructor,
                         });
@@ -216,7 +201,6 @@ const ObjectGenerator = ({ schema } = {}) =>
                                 type: type.name,
                                 invalidData,
                                 data: this.original,
-                                schema: this.schemaToJSON,
                             },
                             me: this.constructor,
                         });
@@ -551,7 +535,6 @@ const ObjectGenerator = ({ schema } = {}) =>
                 flat: obj.flat,
                 entries: () => obj.entries(),
                 keys: () => obj.keys(),
-                schemaToJSON: obj.schemaToJSON,
                 values: () => obj.values(),
                 getByKey: (key, defaultValue) =>
                     obj.getByKey(key, defaultValue),
