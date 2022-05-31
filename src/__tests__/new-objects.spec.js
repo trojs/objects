@@ -382,6 +382,22 @@ const getKeysTestCases = [
             'g.h': { i: 7 },
         },
     },
+    {
+        description: 'Check if we get items with a false value',
+        arr: {
+            a: true,
+            b: false,
+            c: 0,
+            d: '',
+        },
+        keys: ['a', 'b', 'c', 'd', 'e'],
+        expectedValue: {
+            a: true,
+            b: false,
+            c: 0,
+            d: '',
+        },
+    },
 ];
 
 describe.each(getKeysTestCases)(
