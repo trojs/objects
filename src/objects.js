@@ -349,7 +349,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                 const key = currentKey.toString();
                 const value = this.getByKey(key);
 
-                if (value) {
+                if (value !== undefined && value !== null) {
                     accumulator[key] = value;
                 }
 
