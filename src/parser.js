@@ -69,7 +69,7 @@ export default class Parser {
         }
 
         if (Type === Boolean && value.constructor === String) {
-            if (value === '1') {
+            if (String(value) === '1') {
                 return [key, true];
             }
 
