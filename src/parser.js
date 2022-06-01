@@ -75,6 +75,13 @@ export default class Parser {
         return Type ? [key, new Type(value).valueOf()] : [key, value];
     }
 
+    /**
+     * Parse a boolean value.
+     *
+     * @param {*} value
+     *
+     * @return {boolean}
+     */
     parseBoolean(value) {
         if (value.constructor === String) {
             return ['true', 't', 'yes', 'y', 'on', '1'].includes(
