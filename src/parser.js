@@ -67,6 +67,28 @@ export default class Parser {
             const subParser = new Parser({ schema: Type });
             return [key, subParser.parseObject(value)];
         }
+
+        if (Type?.constructor === Boolean || Type?.name === 'Boolean') {
+            return [key, this.parseBoolean(value)];
+        }
         return Type ? [key, new Type(value).valueOf()] : [key, value];
+    }
+
+    parseBoolean(value) {
+        switch (value.constructor) {
+            case String:
+                return ['true', 't', 'yes', 'y', 'on', '1'].includes(
+                    value.trim().toLowerCase()
+                );
+
+            case Number:
+                return value.valueOf() === 1;
+
+            case Boolean:
+                return value.valueOf();
+
+            default:
+                return false;
+        }
     }
 }

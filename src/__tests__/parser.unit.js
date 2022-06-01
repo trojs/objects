@@ -59,4 +59,40 @@ describe('Test parser.js', () => {
             d: null,
         });
     });
+
+    it.each([
+        { a: 'y', b: true },
+        { a: 'yes', b: true },
+        { a: 'Y', b: true },
+        { a: 'YES', b: true },
+        { a: 'true', b: true },
+        { a: 'on', b: true },
+        { a: 1, b: true },
+        { a: true, b: true },
+        { a: '1', b: true },
+        { a: 'n', b: false },
+        { a: 'bla', b: false },
+        { a: 'false', b: false },
+        { a: '0', b: false },
+        { a: 0, b: false },
+        { a: 2, b: false },
+        { a: -1, b: false },
+        { a: {}, b: false },
+        { a: [], b: false },
+    ])('It should parse the boolean values $a -> $b', ({ a, b }) => {
+        const input = {
+            a: null,
+            b: a,
+            c: null,
+            d: null,
+        };
+        const parse = new Parser({ schema: testSchema });
+
+        expect(parse.parseObject(input)).toEqual({
+            a: null,
+            b,
+            c: null,
+            d: null,
+        });
+    });
 });
