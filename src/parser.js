@@ -68,7 +68,7 @@ export default class Parser {
             return [key, subParser.parseObject(value)];
         }
 
-        if (Type === Boolean && value?.constructor === String) {
+        if (Type === Boolean && value.constructor === String) {
             if (value === '1') {
                 return [key, true];
             }
