@@ -71,24 +71,25 @@ export default class Parser {
         if (Type?.constructor === Boolean || Type?.name === 'Boolean') {
             return [key, this.parseBoolean(value)];
         }
+
         return Type ? [key, new Type(value).valueOf()] : [key, value];
     }
 
     parseBoolean(value) {
-        switch (value.constructor) {
-            case String:
-                return ['true', 't', 'yes', 'y', 'on', '1'].includes(
-                    value.trim().toLowerCase()
-                );
-
-            case Number:
-                return value.valueOf() === 1;
-
-            case Boolean:
-                return value.valueOf();
-
-            default:
-                return false;
+        if (value.constructor === String) {
+            return ['true', 't', 'yes', 'y', 'on', '1'].includes(
+                value.trim().toLowerCase()
+            );
         }
+
+        if (value.constructor === Number) {
+            return value.valueOf() === 1;
+        }
+
+        if (value.constructor === Boolean) {
+            return value.valueOf();
+        }
+
+        return false;
     }
 }
