@@ -67,6 +67,15 @@ export default class Parser {
             const subParser = new Parser({ schema: Type });
             return [key, subParser.parseObject(value)];
         }
+
+        if (Type === Boolean && value.constructor === String) {
+            if (String(value) === '1') {
+                return [key, true];
+            }
+
+            return [key, String(value).toLowerCase() === 'true'];
+        }
+
         return Type ? [key, new Type(value).valueOf()] : [key, value];
     }
 }
