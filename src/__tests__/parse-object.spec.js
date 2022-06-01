@@ -135,4 +135,24 @@ describe('Test objects.js parse', () => {
             },
         });
     });
+
+    it('It should handle a boolean with a string false', () => {
+        const input = {
+            a: '101',
+            b: 'false',
+            subSchema: {
+                a: '103',
+                b: 'false'
+            },
+        };
+
+        expect(Test.parse(input)).toEqual({
+            a: 101,
+            b: false,
+            subSchema: {
+                a: 103,
+                b: false,
+            },
+        });
+    });
 });
