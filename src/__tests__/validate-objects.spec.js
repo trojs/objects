@@ -82,6 +82,18 @@ describe('Object test', () => {
         }).toThrowError('The field country should be a String (undefined)');
     });
 
+    it('It should throw an exception', () => {
+        expect(() => {
+            Address.create({
+                street: 'Abc',
+                number: 42,
+                postalCode: '1234AB',
+                city: 'Example',
+                country: '',
+            });
+        }).toThrowError('The field country should be a String ("")');
+    });
+
     it('It should valid with this custom optional type', () => {
         const data = {
             name: 'test',
