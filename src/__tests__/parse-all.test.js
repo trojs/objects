@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
 const schema = {
@@ -6,11 +7,11 @@ const schema = {
 };
 const ObjectWithSchema = Obj({ schema });
 
-describe('Test parseAll', () => {
-    it('It should parse the object for all items', () => {
+test('Test parseAll', async (t) => {
+    await t.test('It should parse the object for all items', () => {
         const data = [{ sku: '123' }, { sku: '124' }];
         const result = ObjectWithSchema.parseAll(data);
         const expected = [{ sku: 123 }, { sku: 124 }];
-        expect(result).toEqual(expected);
+        assert.deepEqual(result, expected);
     });
 });

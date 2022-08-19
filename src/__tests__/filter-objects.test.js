@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
 const testSchema = {
@@ -9,8 +10,8 @@ const testSchema = {
 //  deepcode ignore ExpectsArray: False error, it should allow an object
 const Test = Obj({ schema: testSchema });
 
-describe('Test objects.js filter', () => {
-    it('It should map the object like the array filter', () => {
+test('Test objects.js filter', async (t) => {
+    await t.test('It should map the object like the array filter', () => {
         const input = {
             a: 1,
             b: 2,
@@ -19,12 +20,13 @@ describe('Test objects.js filter', () => {
             a: 1,
         };
 
-        expect(Test.create(input).filter((x) => x === 1)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).filter((x) => x === 1),
             expectedResult
         );
     });
 
-    it('It should map the flat object like the array filter', () => {
+    await t.test('It should map the flat object like the array filter', () => {
         const input = {
             a: 1,
             b: 2,
@@ -39,7 +41,8 @@ describe('Test objects.js filter', () => {
             'g.h.i': 1,
         };
 
-        expect(Test.create(input).flatFilter((x) => x === 1)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).flatFilter((x) => x === 1),
             expectedResult
         );
     });

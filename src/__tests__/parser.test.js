@@ -1,5 +1,6 @@
 /* eslint-disable no-new */
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Parser from '../parser.js';
 
 const testSchema = {
@@ -8,8 +9,8 @@ const testSchema = {
     'c?': String,
 };
 
-describe('Test parser.js', () => {
-    it('It should parse the values', () => {
+test('Test parser.js', async (t) => {
+    await t.test('It should parse the values', () => {
         const input = {
             a: '42',
             b: '1',
@@ -18,7 +19,7 @@ describe('Test parser.js', () => {
         };
         const parse = new Parser({ schema: testSchema });
 
-        expect(parse.parseObject(input)).toEqual({
+        assert.deepEqual(parse.parseObject(input), {
             a: 42,
             b: true,
             c: '42',
@@ -26,7 +27,7 @@ describe('Test parser.js', () => {
         });
     });
 
-    it('It should parse the undefined values', () => {
+    await t.test('It should parse the undefined values', () => {
         const input = {
             a: undefined,
             b: undefined,
@@ -35,7 +36,7 @@ describe('Test parser.js', () => {
         };
         const parse = new Parser({ schema: testSchema });
 
-        expect(parse.parseObject(input)).toEqual({
+        assert.deepEqual(parse.parseObject(input), {
             a: undefined,
             b: undefined,
             c: undefined,
@@ -43,7 +44,7 @@ describe('Test parser.js', () => {
         });
     });
 
-    it('It should parse the nullish values', () => {
+    await t.test('It should parse the nullish values', () => {
         const input = {
             a: null,
             b: null,
@@ -52,7 +53,7 @@ describe('Test parser.js', () => {
         };
         const parse = new Parser({ schema: testSchema });
 
-        expect(parse.parseObject(input)).toEqual({
+        assert.deepEqual(parse.parseObject(input), {
             a: null,
             b: null,
             c: null,
@@ -60,7 +61,7 @@ describe('Test parser.js', () => {
         });
     });
 
-    it.each([
+    const testCases = [
         { a: 'y', b: true },
         { a: 'yes', b: true },
         { a: 'Y', b: true },
@@ -79,20 +80,30 @@ describe('Test parser.js', () => {
         { a: -1, b: false },
         { a: {}, b: false },
         { a: [], b: false },
-    ])('It should parse the boolean values $a -> $b', ({ a, b }) => {
-        const input = {
-            a: null,
-            b: a,
-            c: null,
-            d: null,
-        };
-        const parse = new Parser({ schema: testSchema });
+    ];
+    await t.test('It should parse booleans', async (t2) => {
+        await Promise.all(
+            testCases.map(async ({ a, b }) => {
+                await t2.test(
+                    `It should parse the boolean values {$a} -> {$b}`,
+                    () => {
+                        const input = {
+                            a: null,
+                            b: a,
+                            c: null,
+                            d: null,
+                        };
+                        const parse = new Parser({ schema: testSchema });
 
-        expect(parse.parseObject(input)).toEqual({
-            a: null,
-            b,
-            c: null,
-            d: null,
-        });
+                        assert.deepEqual(parse.parseObject(input), {
+                            a: null,
+                            b,
+                            c: null,
+                            d: null,
+                        });
+                    }
+                );
+            })
+        );
     });
 });

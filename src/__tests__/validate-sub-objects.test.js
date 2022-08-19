@@ -1,7 +1,8 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
-describe('Object test', () => {
+test('Object test', async (t) => {
     const CountrySchema = {
         name: String,
         code: String,
@@ -21,22 +22,27 @@ describe('Object test', () => {
         address: addressSchema,
     };
 
-    it('It should throw an exception for level 1', () => {
+    await t.test('It should throw an exception for level 1', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
         const Country = Obj({ schema: CountrySchema });
-        expect(() => {
+        try {
             Country.create({
                 name: 'Germany',
                 code: 'DE',
                 active: 'true',
             });
-        }).toThrowError('The field active should be a Boolean ("true")');
+        } catch (error) {
+            assert.strictEqual(
+                error.message,
+                'The field active should be a Boolean ("true")'
+            );
+        }
     });
 
-    it('It should throw an exception for level 2', () => {
+    await t.test('It should throw an exception for level 2', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
         const Address = Obj({ schema: addressSchema });
-        expect(() => {
+        try {
             Address.create({
                 street: 'Abc',
                 number: 42,
@@ -48,15 +54,18 @@ describe('Object test', () => {
                     active: 'true',
                 },
             });
-        }).toThrowError(
-            'The field country.active should be a Boolean ("true")'
-        );
+        } catch (error) {
+            assert.strictEqual(
+                error.message,
+                'The field country.active should be a Boolean ("true")'
+            );
+        }
     });
 
-    it('It should throw an exception for level 3', () => {
+    await t.test('It should throw an exception for level 3', () => {
         //  deepcode ignore ExpectsArray: False error, it should allow an object
         const Person = Obj({ schema: personSchema });
-        expect(() => {
+        try {
             Person.create({
                 name: 'John',
                 address: {
@@ -71,8 +80,11 @@ describe('Object test', () => {
                     },
                 },
             });
-        }).toThrowError(
-            'The field address.country.active should be a Boolean ("true")'
-        );
+        } catch (error) {
+            assert.strictEqual(
+                error.message,
+                'The field address.country.active should be a Boolean ("true")'
+            );
+        }
     });
 });

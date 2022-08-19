@@ -11,9 +11,7 @@
         "lint": "eslint src/*.js --config .eslintrc",
         "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
-        "test": "jest",
-        "test:watch": "jest src --watch",
-        "coveralls": "jest && codecov && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+        "test": "c8 node --test src/",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production"
     },
@@ -26,16 +24,8 @@
     ],
     "main": "src/objects.js",
     "devDependencies": {
-        "@babel/core": "^7.18.6",
-        "@babel/eslint-parser": "^7.18.2",
-        "@babel/plugin-transform-modules-commonjs": "^7.18.6",
-        "@babel/plugin-transform-runtime": "^7.18.6",
-        "@babel/preset-env": "^7.18.6",
         "@hckrnews/eslint-config": "^2.1.2",
-        "@jest/globals": "^27.2.4",
-        "babel-jest": "^27.2.4",
-        "codecov": "^3.6.5",
-        "coveralls": "^3.0.13",
+        "c8": "^7.12.0",
         "eslint": "^8.18.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^8.5.0",
@@ -43,8 +33,6 @@
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsx-a11y": "^6.6.0",
         "eslint-plugin-prettier": "^4.1.0",
-        "jest": "^27.2.4",
-        "jest-sonar-reporter": "^2.0.0",
         "jscpd": "^3.2.1",
         "prettier": "^2.2.1"
     },
@@ -53,7 +41,7 @@
         "url": "https://github.com/hckrnews/objects"
     },
     "engines": {
-        "node": ">= 14"
+        "node": ">= 18"
     },
     "keywords": [
         "objects",
