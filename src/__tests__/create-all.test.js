@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
 const schema = {
@@ -6,13 +7,13 @@ const schema = {
 };
 const ObjectWithSchema = Obj({ schema });
 
-describe('Test createAll', () => {
-    it('It should create an object for all items', () => {
+test('Test createAll', async (t) => {
+    await t.test('It should create an object for all items', () => {
         const data = [{ sku: '123' }, { sku: '124' }];
         const result = ObjectWithSchema.createAll(data);
-        expect(result).toEqual(data);
+        assert.deepEqual(result, data);
 
         const keys = result.map((item) => item.keys());
-        expect(keys).toEqual([['sku'], ['sku']]);
+        assert.deepEqual(keys, [['sku'], ['sku']]);
     });
 });

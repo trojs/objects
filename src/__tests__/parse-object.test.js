@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 import Int from '../int.js';
 
@@ -19,8 +20,8 @@ const testSchema = {
 //  deepcode ignore ExpectsArray: False error, it should allow an object
 const Test = Obj({ schema: testSchema });
 
-describe('Test objects.js parse', () => {
-    it('It should return the parsed object', () => {
+test('Test objects.js parse', async (t) => {
+    await t.test('It should return the parsed object', () => {
         const input = {
             a: 1,
             b: true,
@@ -33,7 +34,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input)).toEqual({
+        assert.deepEqual(Test.parse(input), {
             a: 1,
             b: true,
             c: 'test',
@@ -46,7 +47,7 @@ describe('Test objects.js parse', () => {
         });
     });
 
-    it('It should parse the values', () => {
+    await t.test('It should parse the values', () => {
         const input = {
             a: '1',
             b: 'true',
@@ -59,7 +60,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input)).toEqual({
+        assert.deepEqual(Test.parse(input), {
             a: 1,
             b: true,
             c: '3',
@@ -72,7 +73,7 @@ describe('Test objects.js parse', () => {
         });
     });
 
-    it('It should ignore optional fields', () => {
+    await t.test('It should ignore optional fields', () => {
         const input = {
             a: '1',
             b: 'true',
@@ -83,7 +84,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input)).toEqual({
+        assert.deepEqual(Test.parse(input), {
             a: 1,
             b: true,
             c: null,
@@ -102,7 +103,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input2)).toEqual({
+        assert.deepEqual(Test.parse(input2), {
             a: 1,
             b: true,
             subSchema: {
@@ -112,7 +113,7 @@ describe('Test objects.js parse', () => {
         });
     });
 
-    it('It should validate the object', () => {
+    await t.test('It should validate the object', () => {
         const input = {
             a: '101',
             b: 'true',
@@ -124,7 +125,7 @@ describe('Test objects.js parse', () => {
             },
         };
 
-        expect(Test.parse(input, { validate: true })).toEqual({
+        assert.deepEqual(Test.parse(input, { validate: true }), {
             a: 101,
             b: true,
             c: '102',
@@ -136,17 +137,17 @@ describe('Test objects.js parse', () => {
         });
     });
 
-    it('It should handle a boolean with a string false', () => {
+    await t.test('It should handle a boolean with a string false', () => {
         const input = {
             a: '101',
             b: 'false',
             subSchema: {
                 a: '103',
-                b: 'false'
+                b: 'false',
             },
         };
 
-        expect(Test.parse(input)).toEqual({
+        assert.deepEqual(Test.parse(input), {
             a: 101,
             b: false,
             subSchema: {

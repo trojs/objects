@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
 const ObjectWithoutSchema = Obj();
@@ -55,19 +56,21 @@ const TestCases = [
     },
 ];
 
-describe.each(TestCases)(
-    'Test objects.js',
-    ({ description, input, expectedResult }) => {
-        it(description, () => {
-            expect(ObjectWithoutSchema.create(input).flat).toMatchObject(
-                expectedResult
-            );
-        });
-    }
-);
+test('Test objects.js', async (t) => {
+    await Promise.all(
+        TestCases.map(async ({ description, input, expectedResult }) => {
+            await t.test(description, () => {
+                assert.deepEqual(
+                    ObjectWithoutSchema.create(input).flat,
+                    expectedResult
+                );
+            });
+        })
+    );
+});
 
-describe('Test objects.js methods', () => {
-    it('Get the entries', () => {
+test('Test objects.js methods', async (t) => {
+    await t.test('Get the entries', () => {
         const input = {
             a: 1,
             b: 2,
@@ -85,12 +88,13 @@ describe('Test objects.js methods', () => {
             ['g.h.i', 7],
         ];
 
-        expect(ObjectWithoutSchema.create(input).entries()).toMatchObject(
+        assert.deepEqual(
+            ObjectWithoutSchema.create(input).entries(),
             expectedResult
         );
     });
 
-    it('Get the keys', () => {
+    await t.test('Get the keys', () => {
         const input = {
             a: 1,
             b: 2,
@@ -100,12 +104,13 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = ['a', 'b', 'c.0', 'c.1', 'd.e', 'd.f', 'g.h.i'];
 
-        expect(ObjectWithoutSchema.create(input).keys()).toMatchObject(
+        assert.deepEqual(
+            ObjectWithoutSchema.create(input).keys(),
             expectedResult
         );
     });
 
-    it('Get the values', () => {
+    await t.test('Get the values', () => {
         const input = {
             a: 1,
             b: 2,
@@ -115,12 +120,13 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = [1, 2, 3, 4, 5, 6, 7];
 
-        expect(ObjectWithoutSchema.create(input).values()).toMatchObject(
+        assert.deepEqual(
+            ObjectWithoutSchema.create(input).values(),
             expectedResult
         );
     });
 
-    it('Get the length', () => {
+    await t.test('Get the length', () => {
         const input = {
             a: 1,
             b: 2,
@@ -130,7 +136,10 @@ describe('Test objects.js methods', () => {
         };
         const expectedResult = 7;
 
-        expect(ObjectWithoutSchema.create(input).length).toBe(expectedResult);
+        assert.strictEqual(
+            ObjectWithoutSchema.create(input).length,
+            expectedResult
+        );
     });
 });
 
@@ -208,16 +217,23 @@ const getTestCases = [
     },
 ];
 
-describe.each(getTestCases)(
-    'Get value by key',
-    ({ description, arr, key, defaultValue, expectedValue }) => {
-        it(description, () => {
-            expect(
-                ObjectWithoutSchema.create(arr).getByKey(key, defaultValue)
-            ).toEqual(expectedValue);
-        });
-    }
-);
+test('Get value by key', async (t) => {
+    await Promise.all(
+        getTestCases.map(
+            async ({ description, arr, key, defaultValue, expectedValue }) => {
+                await t.test(description, () => {
+                    assert.deepEqual(
+                        ObjectWithoutSchema.create(arr).getByKey(
+                            key,
+                            defaultValue
+                        ),
+                        expectedValue
+                    );
+                });
+            }
+        )
+    );
+});
 
 const hasTestCases = [
     {
@@ -248,16 +264,18 @@ const hasTestCases = [
     },
 ];
 
-describe.each(hasTestCases)(
-    'Check if the object has a key',
-    ({ description, arr, key, expectedValue }) => {
-        it(description, () => {
-            expect(ObjectWithoutSchema.create(arr).has(key)).toEqual(
-                expectedValue
-            );
-        });
-    }
-);
+test('Check if the object has a key', async (t) => {
+    await Promise.all(
+        hasTestCases.map(async ({ description, arr, key, expectedValue }) => {
+            await t.test(description, () => {
+                assert.deepEqual(
+                    ObjectWithoutSchema.create(arr).has(key),
+                    expectedValue
+                );
+            });
+        })
+    );
+});
 
 const originalHasTestCases = [
     {
@@ -288,16 +306,20 @@ const originalHasTestCases = [
     },
 ];
 
-describe.each(originalHasTestCases)(
-    'Check if the original object has a key',
-    ({ description, arr, key, expectedValue }) => {
-        it(description, () => {
-            expect(ObjectWithoutSchema.create(arr).originalHas(key)).toEqual(
-                expectedValue
-            );
-        });
-    }
-);
+test('Check if the original object has a key', async (t) => {
+    await Promise.all(
+        originalHasTestCases.map(
+            async ({ description, arr, key, expectedValue }) => {
+                await t.test(description, () => {
+                    assert.deepEqual(
+                        ObjectWithoutSchema.create(arr).originalHas(key),
+                        expectedValue
+                    );
+                });
+            }
+        )
+    );
+});
 
 const getKeysTestCases = [
     {
@@ -400,16 +422,23 @@ const getKeysTestCases = [
     },
 ];
 
-describe.each(getKeysTestCases)(
-    'Check if the object has the keys',
-    ({ description, arr, keys, defaultValue, expectedValue }) => {
-        it(description, () => {
-            expect(
-                ObjectWithoutSchema.create(arr).getKeys(keys, defaultValue)
-            ).toEqual(expectedValue);
-        });
-    }
-);
+test('Check if the object has the keys', async (t) => {
+    await Promise.all(
+        getKeysTestCases.map(
+            async ({ description, arr, keys, defaultValue, expectedValue }) => {
+                await t.test(description, () => {
+                    assert.deepEqual(
+                        ObjectWithoutSchema.create(arr).getKeys(
+                            keys,
+                            defaultValue
+                        ),
+                        expectedValue
+                    );
+                });
+            }
+        )
+    );
+});
 
 const getFlatKeysTestCases = [
     {
@@ -497,16 +526,23 @@ const getFlatKeysTestCases = [
     },
 ];
 
-describe.each(getFlatKeysTestCases)(
-    'Check if the object has the keys (flat)',
-    ({ description, arr, keys, defaultValue, expectedValue }) => {
-        it(description, () => {
-            expect(
-                ObjectWithoutSchema.create(arr).getFlatKeys(keys, defaultValue)
-            ).toEqual(expectedValue);
-        });
-    }
-);
+test('Check if the object has the keys (flat)', async (t) => {
+    await Promise.all(
+        getFlatKeysTestCases.map(
+            async ({ description, arr, keys, defaultValue, expectedValue }) => {
+                await t.test(description, () => {
+                    assert.deepEqual(
+                        ObjectWithoutSchema.create(arr).getFlatKeys(
+                            keys,
+                            defaultValue
+                        ),
+                        expectedValue
+                    );
+                });
+            }
+        )
+    );
+});
 
 const includesTestCases = [
     {
@@ -571,13 +607,17 @@ const includesTestCases = [
     },
 ];
 
-describe.each(includesTestCases)(
-    'Check if the object includes a key',
-    ({ description, arr, key, expectedValue }) => {
-        it(description, () => {
-            expect(ObjectWithoutSchema.create(arr).includes(key)).toEqual(
-                expectedValue
-            );
-        });
-    }
-);
+test('Check if the object includes a key', async (t) => {
+    await Promise.all(
+        includesTestCases.map(
+            async ({ description, arr, key, expectedValue }) => {
+                await t.test(description, () => {
+                    assert.deepEqual(
+                        ObjectWithoutSchema.create(arr).includes(key),
+                        expectedValue
+                    );
+                });
+            }
+        )
+    );
+});

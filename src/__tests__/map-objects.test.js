@@ -1,4 +1,5 @@
-import { expect, describe, it } from '@jest/globals';
+import test from 'node:test';
+import assert from 'assert';
 import Obj from '../objects.js';
 
 const testSchema = {
@@ -9,8 +10,8 @@ const testSchema = {
 //  deepcode ignore ExpectsArray: False error, it should allow an object
 const Test = Obj({ schema: testSchema });
 
-describe('Test objects.js map', () => {
-    it('It should map the object like the array map', () => {
+test('Test objects.js map', async (t) => {
+    await t.test('It should map the object like the array map', () => {
         const input = {
             a: 1,
             b: 2,
@@ -20,12 +21,13 @@ describe('Test objects.js map', () => {
             b: 4,
         };
 
-        expect(Test.create(input).map((x) => x * 2)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).map((x) => x * 2),
             expectedResult
         );
     });
 
-    it('It should map the flat object like the array map', () => {
+    await t.test('It should map the flat object like the array map', () => {
         const input = {
             a: 1,
             b: 2,
@@ -43,12 +45,13 @@ describe('Test objects.js map', () => {
             'g.h.i': 14,
         };
 
-        expect(Test.create(input).flatMap((x) => x * 2)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).flatMap((x) => x * 2),
             expectedResult
         );
     });
 
-    it('It should use the key of the map', () => {
+    await t.test('It should use the key of the map', () => {
         const input = {
             a: 1,
             b: 2,
@@ -58,12 +61,13 @@ describe('Test objects.js map', () => {
             b: 'b',
         };
 
-        expect(Test.create(input).map((x, y) => y)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).map((x, y) => y),
             expectedResult
         );
     });
 
-    it('It should use the original result of the map', () => {
+    await t.test('It should use the original result of the map', () => {
         const input = {
             a: 1,
             b: 2,
@@ -79,7 +83,8 @@ describe('Test objects.js map', () => {
             },
         };
 
-        expect(Test.create(input).map((x, y, z) => z)).toMatchObject(
+        assert.deepEqual(
+            Test.create(input).map((x, y, z) => z),
             expectedResult
         );
     });
