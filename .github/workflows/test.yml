@@ -17,7 +17,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - name: npm test
+      - name: npm test without coverage
+        run: |
+          npm ci
+          node --test src/
+        env:
+          CI: true
+      - name: npm test with coverage
         run: |
           npm ci
           npm test
