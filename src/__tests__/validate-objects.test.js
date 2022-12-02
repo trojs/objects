@@ -1,8 +1,8 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-new */
 import test from 'node:test';
-import assert from 'assert';
-import Obj from '../objects.js';
+import assert from 'node:assert';
+import { Obj } from '../objects.js';
 import test1Schema from '../schemas/test1.js';
 import Test2 from '../schemas/test2.js';
 

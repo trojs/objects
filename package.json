@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "6.0.0",
+    "version": "6.0.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -31,18 +31,19 @@
         "dist/objects.umd.cjs",
         "dist/objects.umd.cjs.map"
     ],
-    "main": "dist/objects.js",
+    "main": "dist/objects.umd.cjs",
     "source": "src/objects.js",
     "module": "dist/objects.module.mjs",
     "unpkg": "dist/objects.umd.cjs",
     "umd:main": "dist/objects.umd.cjs",
     "exports": {
         "node": {
+            "default": "./dist/objects.umd.cjs",
             "module": "./src/objects.js",
             "require": "./dist/objects.umd.cjs"
         },
         "require": "./dist/objects.umd.cjs",
-        "default": "./src/objects.js"
+        "default": "./dist/objects.umd.cjs"
     },
     "devDependencies": {
         "@hckrnews/eslint-config": "^2.1.2",
@@ -70,8 +71,8 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/error": "^1.0.0",
-        "@hckrnews/validator": "^8.0.1"
+        "@hckrnews/error": "^1.0.1",
+        "@hckrnews/validator": "^8.0.5"
     },
     "funding": {
         "type": "github",

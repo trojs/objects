@@ -1,6 +1,6 @@
 /* eslint-disable no-new */
 import test from 'node:test';
-import assert from 'assert';
+import assert from 'node:assert';
 import Parser from '../parser.js';
 
 const testSchema = {
