@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "5.0.1",
+    "version": "6.0.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -13,16 +13,37 @@
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "test": "c8 node --test src/",
         "cpd": "node_modules/jscpd/bin/jscpd src",
-        "vulnerabilities": "npm audit --production"
+        "vulnerabilities": "npm audit --production",
+        "build": "microbundle --target node src/objects.js"
     },
     "type": "module",
     "files": [
         "src/schemas/parse-options.js",
         "src/objects.js",
         "src/parser.js",
-        "src/int.js"
+        "src/int.js",
+        "dist/objects.cjs",
+        "dist/objects.cjs.map",
+        "dist/objects.js",
+        "dist/objects.js.map",
+        "dist/objects.module.mjs",
+        "dist/objects.module.mjs.map",
+        "dist/objects.umd.cjs",
+        "dist/objects.umd.cjs.map"
     ],
-    "main": "src/objects.js",
+    "main": "dist/objects.js",
+    "source": "src/objects.js",
+    "module": "dist/objects.module.mjs",
+    "unpkg": "dist/objects.umd.cjs",
+    "umd:main": "dist/objects.umd.cjs",
+    "exports": {
+        "node": {
+            "module": "./src/objects.js",
+            "require": "./dist/objects.umd.cjs"
+        },
+        "require": "./dist/objects.umd.cjs",
+        "default": "./src/objects.js"
+    },
     "devDependencies": {
         "@hckrnews/eslint-config": "^2.1.2",
         "c8": "^7.12.0",
@@ -34,6 +55,7 @@
         "eslint-plugin-jsx-a11y": "^6.6.0",
         "eslint-plugin-prettier": "^4.1.0",
         "jscpd": "^3.2.1",
+        "microbundle": "^0.15.1",
         "prettier": "^2.2.1"
     },
     "repository": {
@@ -48,7 +70,11 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/error": "^0.3.8",
-        "@hckrnews/validator": "^7.0.0"
+        "@hckrnews/error": "^1.0.0",
+        "@hckrnews/validator": "^8.0.1"
+    },
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/w3nl"
     }
 }
