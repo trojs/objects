@@ -30,7 +30,7 @@ For all posibilities, check the validation package readme.
 
 Example usage:
 ```javascript
-import Obj from '@hckrnews/objects'
+import { Obj } from '@hckrnews/objects'
 
 const addressSchema = {
     street: String,
@@ -64,7 +64,7 @@ console.log(myAddress)
 You can also define sub schemas:
 
 ```javascript
-import Obj from '@hckrnews/objects'
+import { Obj } from '@hckrnews/objects'
 
 const filterSchema = {
   key: String,

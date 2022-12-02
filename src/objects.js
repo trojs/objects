@@ -603,5 +603,5 @@ const ObjectGenerator = ({ schema } = {}) =>
             return data.map((item) => Obj.parse(item));
         }
     };
-export default ObjectGenerator;
-export { Parser, Int };
+
+export { ObjectGenerator as Obj, Parser, Int };
