@@ -71,7 +71,7 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/error": "^1.0.1",
+        "@hckrnews/error": "^1.0.4",
         "@hckrnews/validator": "^8.0.5"
     },
     "funding": {
