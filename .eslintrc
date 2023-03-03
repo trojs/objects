@@ -27,6 +27,11 @@
             "configFile": "./babel.config.cjs"
         }
     },
+    "settings": {
+        "jsdoc": {
+            "mode": "typescript"
+        }
+    },
     "overrides": [
         {
             "files": [
