@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "6.0.4",
+    "version": "6.0.5",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -46,7 +46,7 @@
         "default": "./dist/objects.umd.cjs"
     },
     "devDependencies": {
-        "@hckrnews/eslint-config": "^2.1.2",
+        "@hckrnews/eslint-config": "^3.0.0",
         "c8": "^7.12.0",
         "eslint": "^8.18.0",
         "eslint-config-airbnb-base": "^15.0.0",
@@ -77,5 +77,8 @@
     "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/w3nl"
+    },
+    "overrides": {
+        "xml2js": "^0.5.0"
     }
 }
