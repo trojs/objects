@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "6.0.6",
+    "version": "6.0.7",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -14,7 +14,8 @@
         "test": "c8 node --test src/",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production",
-        "build": "microbundle --target node src/objects.js"
+        "build": "microbundle --target node src/objects.js",
+        "postinstall": "node postinstall.js"
     },
     "type": "module",
     "files": [
@@ -29,7 +30,8 @@
         "dist/objects.module.mjs",
         "dist/objects.module.mjs.map",
         "dist/objects.umd.cjs",
-        "dist/objects.umd.cjs.map"
+        "dist/objects.umd.cjs.map",
+        "postinstall.js"
     ],
     "main": "dist/objects.umd.cjs",
     "source": "src/objects.js",
