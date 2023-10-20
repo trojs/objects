@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "6.0.7",
+    "version": "6.0.8",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -48,18 +48,19 @@
         "default": "./dist/objects.umd.cjs"
     },
     "devDependencies": {
+        "@hckrnews/eslint-code-quality": "^0.1.5",
         "@hckrnews/eslint-config": "^3.0.0",
         "c8": "^8.0.0",
         "eslint": "^8.18.0",
         "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-html": "^6.1.2",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-html": "^7.0.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsx-a11y": "^6.6.0",
-        "eslint-plugin-prettier": "^4.1.0",
+        "eslint-plugin-prettier": "^5.0.0",
         "jscpd": "^3.2.1",
         "microbundle": "^0.15.1",
-        "prettier": "^2.2.1"
+        "prettier": "^3.0.0"
     },
     "repository": {
         "type": "git",
