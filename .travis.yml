@@ -1,13 +1,10 @@
 sudo: true
 dist: trusty
-addons:
 language: node_js
 node_js:
-    - "12"
-    - "14"
-    - "16"
-    - "17"
     - "18"
+    - "20"
+    - "21"
 before_script:
     - npm run lint
 after_script:
