@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "6.0.12",
+    "version": "7.0.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -14,7 +14,6 @@
         "test": "c8 node --test src/__tests__/*.js",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production",
-        "build": "microbundle --target node src/objects.js",
         "postinstall": "node postinstall.js"
     },
     "type": "module",
@@ -23,30 +22,11 @@
         "src/objects.js",
         "src/parser.js",
         "src/int.js",
-        "dist/objects.cjs",
-        "dist/objects.cjs.map",
-        "dist/objects.js",
-        "dist/objects.js.map",
-        "dist/objects.module.mjs",
-        "dist/objects.module.mjs.map",
-        "dist/objects.umd.cjs",
-        "dist/objects.umd.cjs.map",
         "postinstall.js"
     ],
-    "main": "dist/objects.umd.cjs",
+    "main": "src/objects.js",
     "source": "src/objects.js",
-    "module": "dist/objects.module.mjs",
-    "unpkg": "dist/objects.umd.cjs",
-    "umd:main": "dist/objects.umd.cjs",
-    "exports": {
-        "node": {
-            "default": "./dist/objects.umd.cjs",
-            "module": "./src/objects.js",
-            "require": "./dist/objects.umd.cjs"
-        },
-        "require": "./dist/objects.umd.cjs",
-        "default": "./dist/objects.umd.cjs"
-    },
+    "module": "src/objects.js",
     "devDependencies": {
         "@hckrnews/eslint-code-quality": "^0.1.5",
         "@hckrnews/eslint-config": "^3.0.0",
@@ -59,7 +39,6 @@
         "eslint-plugin-jsx-a11y": "^6.6.0",
         "eslint-plugin-prettier": "^5.0.0",
         "jscpd": "^3.2.1",
-        "microbundle": "^0.15.1",
         "prettier": "^3.0.0"
     },
     "repository": {
@@ -74,8 +53,8 @@
         "flat"
     ],
     "dependencies": {
-        "@hckrnews/error": "^1.0.1",
-        "@hckrnews/validator": "^8.0.5"
+        "@hckrnews/error": "^2.0.0",
+        "@hckrnews/validator": "^9.0.0"
     },
     "funding": {
         "type": "github",

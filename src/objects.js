@@ -30,6 +30,15 @@ const getValue = ({ data, parentData, field, parentField }) => {
     return value;
 };
 
+/**
+ * Transform data to string.
+ * @param {object} params
+ * @param {object} params.data
+ * @param {object=} params.parentData
+ * @param {object} params.field
+ * @param {object=} params.parentField
+ * @returns {string}
+ */
 const dataToString = ({ data, parentData, field, parentField }) => {
     const fieldName = getFieldName(field);
     const parentFieldName = getFieldName(parentField);
@@ -56,7 +65,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * Set the original and prefix.
          *
          * @param {object} original
-         * @param {string} prefix
+         * @param {string=} prefix
          */
         constructor(original, prefix) {
             this.original = original;
