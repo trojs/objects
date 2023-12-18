@@ -28,7 +28,8 @@ export default class Parser {
     /**
      * Get the field type for a key, also check optional keys.
      *
-     * @param {string} key
+     * @param {object} params
+     * @param {string} params.key
      *
      * @return {Function}
      */
@@ -51,10 +52,8 @@ export default class Parser {
     /**
      * Parse a single field, and check for nested schemas.
      *
-     * @param {string} key
-     * @param {*} value
-     *
-     * @return {array}
+     * @param {[string, any]} param
+     * @returns {any[]}
      */
     parse([key, value]) {
         const Type = this.getFieldType({ key });
