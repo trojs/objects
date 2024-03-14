@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "7.0.3",
+    "version": "7.0.4",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -34,7 +34,7 @@
         "eslint": "^8.18.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^9.0.0",
-        "eslint-plugin-html": "^7.0.0",
+        "eslint-plugin-html": "^8.0.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsx-a11y": "^6.6.0",
         "eslint-plugin-prettier": "^5.1.3",
