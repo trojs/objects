@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/objects",
     "description": "Create valid JavaScript objects",
-    "version": "7.0.4",
+    "version": "7.0.5",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -59,8 +59,5 @@
     "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/w3nl"
-    },
-    "overrides": {
-        "xml2js": "^0.6.0"
     }
 }
