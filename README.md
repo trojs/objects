@@ -1,6 +1,6 @@
 # Create valid JavaScript objects
 
-[![NPM version][npm-image]][npm-url] [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url] [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) 
+[![NPM version][npm-image]][npm-url] [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_objects&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_objects)
 
@@ -10,9 +10,9 @@ Also get more usefull methods to work with objects.
 
 ## Installation
 
-`npm install @hckrnews/objects`
+`npm install @trojs/objects`
 or
-`yarn add @hckrnews/objects`
+`yarn add @trojs/objects`
 
 ## Test the package
 
@@ -22,7 +22,7 @@ or
 
 ## Validation
 
-For validate the objects, it use the package `@hckrnews/validation` (https://www.npmjs.com/package/@hckrnews/validator)
+For validate the objects, it use the package `@trojs/validation` (https://www.npmjs.com/package/@trojs/validator)
 It will throw an error if the object isnt valid.
 For all posibilities, check the validation package readme.
 
@@ -30,7 +30,7 @@ For all posibilities, check the validation package readme.
 
 Example usage:
 ```javascript
-import { Obj } from '@hckrnews/objects'
+import { Obj } from '@trojs/objects'
 
 const addressSchema = {
     street: String,
@@ -64,7 +64,7 @@ console.log(myAddress)
 You can also define sub schemas:
 
 ```javascript
-import { Obj } from '@hckrnews/objects'
+import { Obj } from '@trojs/objects'
 
 const filterSchema = {
   key: String,
@@ -485,7 +485,5 @@ true
 For arrays you can also use `createAll` and `parseAll`.
 It works the same as `create` and `parse` but it can do it on every item in an array.
 
-[npm-url]: https://www.npmjs.com/package/@hckrnews/objects
-[npm-image]: https://img.shields.io/npm/v/@hckrnews/objects.svg
-[scrutinizer-url]: https://scrutinizer-ci.com/g/hckrnews/objects/?branch=master
-[scrutinizer-image]: https://scrutinizer-ci.com/g/hckrnews/objects/badges/quality-score.png?b=master
+[npm-url]: https://www.npmjs.com/package/@trojs/objects
+[npm-image]: https://img.shields.io/npm/v/@trojs/objects.svg
