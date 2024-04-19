@@ -1,5 +1,5 @@
-import { Validator } from '@hckrnews/validator';
-import { ValidationError } from '@hckrnews/error';
+import { Validator } from '@trojs/validator';
+import { ValidationError } from '@trojs/error';
 import Parser from './parser.js';
 import Int from './int.js';
 import ParseOptionsSchema from './schemas/parse-options.js';
