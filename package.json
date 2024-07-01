@@ -1,7 +1,7 @@
 {
     "name": "@trojs/objects",
     "description": "Create valid JavaScript objects",
-    "version": "8.0.2",
+    "version": "8.0.3",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
