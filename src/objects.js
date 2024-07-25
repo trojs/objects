@@ -54,16 +54,14 @@ const dataToString = ({ data, parentData, field, parentField }) => {
 
 /**
  * Object helper
- *
- * @param {object} schema
- *
- * @return {class}
+ * @param {object} params
+ * @param {object=} params.schema
+ * @returns {Obj}
  */
 const ObjectGenerator = ({ schema } = {}) =>
     class Obj {
         /**
          * Set the original and prefix.
-         *
          * @param {object} original
          * @param {string=} prefix
          */
@@ -79,8 +77,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the sub schema, look e.g. for optional fields.
-         *
-         * @return {object}
+         * @returns {object}
          */
         get subSchema() {
             if (!this.prefix) {
@@ -117,8 +114,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Setup the validator with the subschema.
-         *
-         * @return {object|null}
+         * @returns {object|null}
          */
         get validator() {
             return this.subSchema && this.subSchema.constructor === Object
@@ -128,8 +124,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the original data as array.
-         *
-         * @return {array}
+         * @returns {Array}
          */
         get originalData() {
             return this.original?.constructor === Array
@@ -251,8 +246,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the flat object.
-         *
-         * @return {object}
+         * @returns {object}
          */
         get flat() {
             return this.flatObject;
@@ -260,8 +254,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the object entries.
-         *
-         * @return {array}
+         * @returns {Array}
          */
         entries() {
             return Object.entries(this.flatObject);
@@ -269,8 +262,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the object keys.
-         *
-         * @return {array}
+         * @returns {Array}
          */
         keys() {
             return Object.keys(this.flatObject);
@@ -278,8 +270,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the object values.
-         *
-         * @return {array}
+         * @returns {Array}
          */
         values() {
             return Object.values(this.flatObject);
@@ -287,8 +278,7 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get the object length.
-         *
-         * @return {number}
+         * @returns {number}
          */
         get length() {
             return Object.keys(this.flatObject).length;
@@ -296,11 +286,9 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get an item by key.
-         *
          * @param {string} key
          * @param {object|null} defaultValue
-         *
-         * @return {object|null}
+         * @returns {object|null}
          */
         getByKey(key, defaultValue) {
             if (this.originalHas(key)) {
@@ -327,11 +315,9 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get keys of an item.
-         *
-         * @param {array} keys
+         * @param {Array} keys
          * @param {object|null} defaultValue
-         *
-         * @return {object|null}
+         * @returns {object|null}
          */
         getFlatKeys(keys, defaultValue) {
             const result = this.entries().filter(([currentKey]) =>
@@ -347,11 +333,9 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Get keys of an item.
-         *
-         * @param {array} keys
+         * @param {Array} keys
          * @param {object|null} defaultValue
-         *
-         * @return {object|null}
+         * @returns {object|null}
          */
         getKeys(keys, defaultValue) {
             const result = keys.reduce((accumulator, currentKey) => {
@@ -374,10 +358,8 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Check if the original object has a key.
-         *
          * @param {string} key
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         originalHas(key) {
             return key in this.original;
@@ -385,10 +367,8 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Check if the object has a key.
-         *
          * @param {string} key
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         has(key) {
             return key in this.flatObject;
@@ -396,10 +376,8 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Check if the object has a key that includes.
-         *
          * @param {string} key
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         includes(key) {
             return (
@@ -410,10 +388,8 @@ const ObjectGenerator = ({ schema } = {}) =>
         /**
          * The map() method creates a new object populated with the results of
          * calling a provided function on every element in the original object.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {object}
+         * @returns {object}
          */
         map(callbackFunction) {
             return Object.fromEntries(
@@ -427,10 +403,8 @@ const ObjectGenerator = ({ schema } = {}) =>
         /**
          * The filter() method creates a new object with all elements
          * that pass the test implemented by the provided function.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {object}
+         * @returns {object}
          */
         filter(callbackFunction) {
             return Object.fromEntries(
@@ -445,10 +419,8 @@ const ObjectGenerator = ({ schema } = {}) =>
          * The every() method tests whether all elements in the object pass the
          * test implemented by the provided function.
          * It returns a Boolean value.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         every(callbackFunction) {
             return Object.values(this.original).every((value) =>
@@ -462,10 +434,8 @@ const ObjectGenerator = ({ schema } = {}) =>
          * It returns true if, in the object, it finds an element for which the
          * provided function returns true; otherwise it returns false.
          * It doesn't modify the object.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         some(callbackFunction) {
             return Object.values(this.original).some((value) =>
@@ -476,10 +446,8 @@ const ObjectGenerator = ({ schema } = {}) =>
         /**
          * The flatMap() method creates a new object populated with the results
          * of calling a provided function on every element in the flat object.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {object}
+         * @returns {object}
          */
         flatMap(callbackFunction) {
             return Object.fromEntries(
@@ -493,10 +461,8 @@ const ObjectGenerator = ({ schema } = {}) =>
         /**
          * The flatFilter() method creates a new object with all elements
          * that pass the test implemented by the provided function.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {object}
+         * @returns {object}
          */
         flatFilter(callbackFunction) {
             return Object.fromEntries(
@@ -510,10 +476,8 @@ const ObjectGenerator = ({ schema } = {}) =>
          * The every() method tests whether all elements in the object pass the
          * test implemented by the provided function.
          * It returns a Boolean value.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         flatEvery(callbackFunction) {
             return this.values().every((value) => callbackFunction(value));
@@ -525,10 +489,8 @@ const ObjectGenerator = ({ schema } = {}) =>
          * It returns true if, in the object, it finds an element for which the
          * provided function returns true; otherwise it returns false.
          * It doesn't modify the object.
-         *
          * @param {Function} callbackFunction
-         *
-         * @return {boolean}
+         * @returns {boolean}
          */
         flatSome(callbackFunction) {
             return this.values().some((value) => callbackFunction(value));
@@ -569,10 +531,8 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Create for every item in the array an anvancd object.
-         *
          * @param {Array} data
-         *
-         * @return {Array}
+         * @returns {Array}
          */
         static createAll(data) {
             return data.map((item) => Obj.create(item));
@@ -580,11 +540,9 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Parse the data, so it converts all values to the given schema.
-         *
          * @param {object} data
          * @param {object} options
-         *
-         * @return {object}
+         * @returns {object}
          */
         static parse(data, options = {}) {
             const ParseOptions = ObjectGenerator({
@@ -603,10 +561,8 @@ const ObjectGenerator = ({ schema } = {}) =>
 
         /**
          * Parse every item in the array.
-         *
          * @param {Array} data
-         *
-         * @return {Array}
+         * @returns {Array}
          */
         static parseAll(data) {
             return data.map((item) => Obj.parse(item));

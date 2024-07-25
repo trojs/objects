@@ -6,7 +6,6 @@ export default class Int extends Number {
     /**
      * Constructor that receive the value,
      * and pass it to the number constructor.
-     *
      * @param {number} value
      */
     constructor(value) {
@@ -16,7 +15,6 @@ export default class Int extends Number {
 
     /**
      * Validate the value, it should throw an error if it isnt a integer.
-     *
      * @param {number} value
      */
     validate(value) {

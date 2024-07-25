@@ -9,7 +9,10 @@
         "import"
     ],
     "extends": [
-        "@hckrnews/eslint-config"
+        "@hckrnews/eslint-config",
+        "plugin:import/recommended",
+        "plugin:n/recommended",
+        "plugin:jsdoc/recommended"
     ],
     "rules": {
         "import/extensions": [
@@ -18,7 +21,10 @@
             {
                 "js": "always"
             }
-        ]
+        ],
+        "jsdoc/require-param-description": "off",
+        "jsdoc/require-property-description": "off",
+        "jsdoc/require-returns-description": "off"
     },
     "parserOptions": {
         "sourceType": "module",

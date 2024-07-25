@@ -5,8 +5,8 @@ export default class Parser {
     /**
      * Constructor that receive the value,
      * and set the schema to a local variable.
-     *
-     * @param {object} schema
+     * @param {object} params
+     * @param {object} params.schema
      */
     constructor({ schema }) {
         this.schema = schema;
@@ -14,10 +14,8 @@ export default class Parser {
 
     /**
      * Loop through the object, parse every field, and return an object.
-     *
      * @param {object} data
-     *
-     * @return {object}
+     * @returns {object}
      */
     parseObject(data) {
         return Object.fromEntries(
@@ -27,11 +25,9 @@ export default class Parser {
 
     /**
      * Get the field type for a key, also check optional keys.
-     *
      * @param {object} params
      * @param {string} params.key
-     *
-     * @return {Function}
+     * @returns {Function}
      */
     getFieldType({ key }) {
         if (this.schema[key]) {
@@ -51,7 +47,6 @@ export default class Parser {
 
     /**
      * Parse a single field, and check for nested schemas.
-     *
      * @param {[string, any]} param
      * @returns {any[]}
      */
@@ -76,10 +71,8 @@ export default class Parser {
 
     /**
      * Parse a boolean value.
-     *
      * @param {*} value
-     *
-     * @return {boolean}
+     * @returns {boolean}
      */
     parseBoolean(value) {
         if (value.constructor === String) {
