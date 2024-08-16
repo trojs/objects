@@ -56,7 +56,7 @@
         "flat"
     ],
     "dependencies": {
-        "@trojs/error": "^3.0.0",
+        "@trojs/error": "^3.0.4",
         "@trojs/validator": "^10.0.0"
     },
     "funding": {
