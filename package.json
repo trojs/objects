@@ -57,19 +57,10 @@
     ],
     "dependencies": {
         "@trojs/error": "^3.0.0",
-        "@trojs/validator": "^10.0.0"
+        "@trojs/validator": "^11.0.0"
     },
     "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/w3nl"
-    },
-    "overrides": {
-        "eslint-plugin-sonarjs": {
-            "eslint": "^9.15.0",
-            "@typescript-eslint/eslint-plugin": "^8.0.0",
-            "@typescript-eslint/utils": "^8.0.0",
-            "eslint-plugin-import": "^2.31.0",
-            "eslint-plugin-react-hooks": "^5.0.0"
-        }
     }
 }
