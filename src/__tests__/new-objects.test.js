@@ -442,7 +442,7 @@ test('Check if the object has the keys', async (t) => {
 
 const getFlatKeysTestCases = [
     {
-        description: 'Check if we can a single keys',
+        description: 'Check if we can a single keys (flat)',
         arr: {
             turtle: 'Leonardo',
             food: 'Pizza',
@@ -454,7 +454,7 @@ const getFlatKeysTestCases = [
         }
     },
     {
-        description: 'Check if we can get multiple keys',
+        description: 'Check if we can get multiple keys (flat)',
         arr: {
             turtle: 'Leonardo',
             food: 'Pizza',
@@ -467,7 +467,7 @@ const getFlatKeysTestCases = [
         }
     },
     {
-        description: 'Check if we only get existing keys',
+        description: 'Check if we only get existing keys (flat)',
         arr: {
             turtle: 'Leonardo',
             food: 'Pizza',
@@ -482,7 +482,7 @@ const getFlatKeysTestCases = [
         }
     },
     {
-        description: 'Check if we get an empty object if no keys exist',
+        description: 'Check if we get an empty object if no keys exist (flat)',
         arr: {
             turtle: 'Leonardo',
             food: 'Pizza',
@@ -492,7 +492,7 @@ const getFlatKeysTestCases = [
         expectedValue: undefined
     },
     {
-        description: 'Check if we get the default value if no keys exists',
+        description: 'Check if we get the default value if no keys exists (flat)',
         arr: {
             turtle: 'Leonardo',
             food: 'Pizza',
@@ -507,7 +507,7 @@ const getFlatKeysTestCases = [
         }
     },
     {
-        description: 'Check if we get deep nested keys',
+        description: 'Check if we get deep nested keys (flat)',
         arr: {
             a: 1,
             b: 2,
