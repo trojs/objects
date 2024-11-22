@@ -1,4 +1,4 @@
 export default {
     example: 'string',
-    'example2?': 'string',
-};
+    'example2?': 'string'
+}

@@ -1,3 +1,3 @@
 export default {
-    example: 'string',
-};
+    example: 'string'
+}

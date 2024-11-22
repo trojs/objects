@@ -9,7 +9,7 @@ export default class Parser {
      * @param {object} params.schema
      */
     constructor({ schema }) {
-        this.schema = schema;
+        this.schema = schema
     }
 
     /**
@@ -20,7 +20,7 @@ export default class Parser {
     parseObject(data) {
         return Object.fromEntries(
             Object.entries(data).map(this.parse.bind(this))
-        );
+        )
     }
 
     /**
@@ -31,18 +31,18 @@ export default class Parser {
      */
     getFieldType({ key }) {
         if (this.schema[key]) {
-            return this.schema[key];
+            return this.schema[key]
         }
 
         if (this.schema[`${key}?`]) {
-            return this.schema[`${key}?`];
+            return this.schema[`${key}?`]
         }
 
         if (this.schema[`?${key}`]) {
-            return this.schema[`?${key}`];
+            return this.schema[`?${key}`]
         }
 
-        return null;
+        return null
     }
 
     /**
@@ -51,22 +51,22 @@ export default class Parser {
      * @returns {any[]}
      */
     parse([key, value]) {
-        const Type = this.getFieldType({ key });
+        const Type = this.getFieldType({ key })
 
         if (value === undefined || value === null) {
-            return [key, value];
+            return [key, value]
         }
 
         if (Type?.constructor === Object) {
-            const subParser = new Parser({ schema: Type });
-            return [key, subParser.parseObject(value)];
+            const subParser = new Parser({ schema: Type })
+            return [key, subParser.parseObject(value)]
         }
 
         if (Type?.constructor === Boolean || Type?.name === 'Boolean') {
-            return [key, this.parseBoolean(value)];
+            return [key, this.parseBoolean(value)]
         }
 
-        return Type ? [key, new Type(value).valueOf()] : [key, value];
+        return Type ? [key, new Type(value).valueOf()] : [key, value]
     }
 
     /**
@@ -78,17 +78,17 @@ export default class Parser {
         if (value.constructor === String) {
             return ['true', 't', 'yes', 'y', 'on', '1'].includes(
                 value.trim().toLowerCase()
-            );
+            )
         }
 
         if (value.constructor === Number) {
-            return value.valueOf() === 1;
+            return value.valueOf() === 1
         }
 
         if (value.constructor === Boolean) {
-            return value.valueOf();
+            return value.valueOf()
         }
 
-        return false;
+        return false
     }
 }

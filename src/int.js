@@ -9,8 +9,8 @@ export default class Int extends Number {
      * @param {number} value
      */
     constructor(value) {
-        super(value);
-        this.validate(value);
+        super(value)
+        this.validate(value)
     }
 
     /**
@@ -19,7 +19,7 @@ export default class Int extends Number {
      */
     validate(value) {
         if (parseInt(value, 10) !== value) {
-            throw new Error(`${value} isnt an integer`);
+            throw new Error(`${value} isnt an integer`)
         }
     }
 }
