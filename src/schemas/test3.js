@@ -1,3 +1,3 @@
 export default {
-    example: String,
-};
+    example: String
+}

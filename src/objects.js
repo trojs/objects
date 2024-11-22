@@ -1,34 +1,34 @@
-import { Validator } from '@trojs/validator';
-import { ValidationError } from '@trojs/error';
-import Parser from './parser.js';
-import Int from './int.js';
-import ParseOptionsSchema from './schemas/parse-options.js';
+import { Validator } from '@trojs/validator'
+import { ValidationError } from '@trojs/error'
+import Parser from './parser.js'
+import Int from './int.js'
+import ParseOptionsSchema from './schemas/parse-options.js'
 
 const getFieldName = (field) => {
     if (!field) {
-        return field;
+        return field
     }
 
     if (field.substr(0, 1) === '?') {
-        return field.substr(1);
+        return field.substr(1)
     }
 
     if (field.substr(-1, 1) === '?') {
-        return field.slice(0, -1);
+        return field.slice(0, -1)
     }
 
-    return field;
-};
+    return field
+}
 
 const getValue = ({ data, parentData, field, parentField }) => {
-    const value = data?.[field];
-    const parentValue = parentData?.[parentField];
+    const value = data?.[field]
+    const parentValue = parentData?.[parentField]
     if (!value && parentValue?.constructor === Array) {
-        return parentValue[0]?.[field];
+        return parentValue[0]?.[field]
     }
 
-    return value;
-};
+    return value
+}
 
 /**
  * Transform data to string.
@@ -40,23 +40,23 @@ const getValue = ({ data, parentData, field, parentField }) => {
  * @returns {string}
  */
 const dataToString = ({ data, parentData, field, parentField }) => {
-    const fieldName = getFieldName(field);
-    const parentFieldName = getFieldName(parentField);
+    const fieldName = getFieldName(field)
+    const parentFieldName = getFieldName(parentField)
     const value = getValue({
         data,
         parentData,
         field: fieldName,
-        parentField: parentFieldName,
-    });
+        parentField: parentFieldName
+    })
 
-    return JSON.stringify(value);
-};
+    return JSON.stringify(value)
+}
 
 /**
  * Object helper
  * @param {object} params
  * @param {object=} params.schema
- * @returns {Obj}
+ * @returns {object}
  */
 const ObjectGenerator = ({ schema } = {}) =>
     class Obj {
@@ -66,13 +66,13 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @param {string=} prefix
          */
         constructor(original, prefix) {
-            this.original = original;
-            this.prefix = prefix;
-            this.flatObject = {};
+            this.original = original
+            this.prefix = prefix
+            this.flatObject = {}
             if (schema) {
-                this.validate();
+                this.validate()
             }
-            this.parseObject();
+            this.parseObject()
         }
 
         /**
@@ -81,35 +81,35 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         get subSchema() {
             if (!this.prefix) {
-                return schema;
+                return schema
             }
 
-            const prefixParts = this.prefix.split('.');
-            let part = 0;
+            const prefixParts = this.prefix.split('.')
+            let part = 0
 
-            let subSchema = schema;
+            let subSchema = schema
             while (part < prefixParts.length) {
-                const currentPart = prefixParts[part];
+                const currentPart = prefixParts[part]
 
                 if (subSchema[currentPart]) {
-                    subSchema = subSchema[currentPart];
+                    subSchema = subSchema[currentPart]
 
-                    part += 1;
+                    part += 1
                 } else if (subSchema[`${currentPart}?`]) {
-                    subSchema = subSchema[`${currentPart}?`];
+                    subSchema = subSchema[`${currentPart}?`]
 
-                    part += 1;
+                    part += 1
                 } else if (subSchema[`?${currentPart}`]) {
-                    subSchema = subSchema[`?${currentPart}`];
+                    subSchema = subSchema[`?${currentPart}`]
 
-                    part += 1;
+                    part += 1
                 } else {
-                    subSchema = null;
-                    break;
+                    subSchema = null
+                    break
                 }
             }
 
-            return subSchema;
+            return subSchema
         }
 
         /**
@@ -119,7 +119,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         get validator() {
             return this.subSchema && this.subSchema.constructor === Object
                 ? new Validator(this.subSchema)
-                : null;
+                : null
         }
 
         /**
@@ -129,33 +129,33 @@ const ObjectGenerator = ({ schema } = {}) =>
         get originalData() {
             return this.original?.constructor === Array
                 ? this.original
-                : [this.original];
+                : [this.original]
         }
 
         subValidator({ field, type, data, parent = '' }) {
-            const path = [parent, field].filter((item) => item).join('.');
-            const subData = data[field];
-            const subValidator = new Validator(type);
-            subValidator.validate(subData);
-            const [subField, subType] = subValidator.errors[0];
+            const path = [parent, field].filter((item) => item).join('.')
+            const subData = data[field]
+            const subValidator = new Validator(type)
+            subValidator.validate(subData)
+            const [subField, subType] = subValidator.errors[0]
             const invalidData = dataToString({
                 data: subData,
                 parentData: data,
                 field: subField,
-                parentField: field,
-            });
+                parentField: field
+            })
 
             if (subType?.constructor === Object) {
                 this.subValidator({
                     field: subField,
                     type: subType,
                     data: subData,
-                    parent: path,
-                });
+                    parent: path
+                })
             }
 
             const subTypeName =
-                subType?.constructor === String ? subType : subType.name;
+                subType?.constructor === String ? subType : subType.name
 
             throw new ValidationError({
                 message: `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`,
@@ -163,26 +163,26 @@ const ObjectGenerator = ({ schema } = {}) =>
                     field: `${path}.${subField}`,
                     type: subTypeName,
                     invalidData,
-                    data: this.original,
+                    data: this.original
                 },
-                me: this.constructor,
-            });
+                me: this.constructor
+            })
         }
 
         /**
          * Validate the original data.
          */
         validate() {
-            const { validator } = this;
+            const { validator } = this
 
             if (!validator) {
-                return;
+                return
             }
 
             this.originalData.forEach((data) => {
                 if (!validator.validate(data)) {
-                    const [field, type] = validator.errors[0];
-                    const invalidData = dataToString({ data, field });
+                    const [field, type] = validator.errors[0]
+                    const invalidData = dataToString({ data, field })
 
                     if (type?.constructor === String) {
                         throw new ValidationError({
@@ -191,12 +191,12 @@ const ObjectGenerator = ({ schema } = {}) =>
                                 field,
                                 type,
                                 invalidData,
-                                data: this.original,
+                                data: this.original
                             },
-                            me: this.constructor,
-                        });
+                            me: this.constructor
+                        })
                     } else if (type?.constructor === Object) {
-                        this.subValidator({ field, type, data });
+                        this.subValidator({ field, type, data })
                     } else {
                         throw new ValidationError({
                             message: `The field ${field} should be a ${type.name} (${invalidData})`,
@@ -204,13 +204,13 @@ const ObjectGenerator = ({ schema } = {}) =>
                                 field,
                                 type: type.name,
                                 invalidData,
-                                data: this.original,
+                                data: this.original
                             },
-                            me: this.constructor,
-                        });
+                            me: this.constructor
+                        })
                     }
                 }
-            });
+            })
         }
 
         /**
@@ -219,29 +219,29 @@ const ObjectGenerator = ({ schema } = {}) =>
         parseObject() {
             Object.entries(this.original).forEach(
                 ([originalRowIndex, originalRow]) => {
-                    let index = originalRowIndex;
+                    let index = originalRowIndex
 
                     if (this.prefix) {
-                        index = [this.prefix, originalRowIndex].join('.');
+                        index = [this.prefix, originalRowIndex].join('.')
                     }
 
                     if (
                         originalRow?.constructor === Object ||
                         originalRow?.constructor === Array
                     ) {
-                        const childRows = new Obj(originalRow, index).flat;
+                        const childRows = new Obj(originalRow, index).flat
 
                         this.flatObject = Object.assign(
                             this.flatObject,
                             childRows
-                        );
+                        )
 
-                        return;
+                        return
                     }
 
-                    this.flatObject[index] = originalRow;
+                    this.flatObject[index] = originalRow
                 }
-            );
+            )
         }
 
         /**
@@ -249,7 +249,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {object}
          */
         get flat() {
-            return this.flatObject;
+            return this.flatObject
         }
 
         /**
@@ -257,7 +257,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {Array}
          */
         entries() {
-            return Object.entries(this.flatObject);
+            return Object.entries(this.flatObject)
         }
 
         /**
@@ -265,7 +265,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {Array}
          */
         keys() {
-            return Object.keys(this.flatObject);
+            return Object.keys(this.flatObject)
         }
 
         /**
@@ -273,7 +273,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {Array}
          */
         values() {
-            return Object.values(this.flatObject);
+            return Object.values(this.flatObject)
         }
 
         /**
@@ -281,7 +281,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {number}
          */
         get length() {
-            return Object.keys(this.flatObject).length;
+            return Object.keys(this.flatObject).length
         }
 
         /**
@@ -293,24 +293,24 @@ const ObjectGenerator = ({ schema } = {}) =>
         getByKey(key, defaultValue) {
             if (this.originalHas(key)) {
                 return Object.getOwnPropertyDescriptor(this.original, key)
-                    .value;
+                    .value
             }
 
             if (this.has(key)) {
-                return this.flatObject[key];
+                return this.flatObject[key]
             }
 
             if (this.includes(key)) {
                 return this.entries()
                     .filter(([currentKey]) => currentKey.startsWith(key))
                     .reduce((accumulator, [currentKey, currentValue]) => {
-                        const subKey = currentKey.substring(key.length + 1);
-                        accumulator[subKey] = currentValue;
-                        return accumulator;
-                    }, {});
+                        const subKey = currentKey.substring(key.length + 1)
+                        accumulator[subKey] = currentValue
+                        return accumulator
+                    }, {})
             }
 
-            return defaultValue;
+            return defaultValue
         }
 
         /**
@@ -322,13 +322,13 @@ const ObjectGenerator = ({ schema } = {}) =>
         getFlatKeys(keys, defaultValue) {
             const result = this.entries().filter(([currentKey]) =>
                 keys.some((key) => currentKey.startsWith(key))
-            );
+            )
 
             if (result.length < 1) {
-                return defaultValue;
+                return defaultValue
             }
 
-            return Object.fromEntries(result);
+            return Object.fromEntries(result)
         }
 
         /**
@@ -339,21 +339,21 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         getKeys(keys, defaultValue) {
             const result = keys.reduce((accumulator, currentKey) => {
-                const key = currentKey.toString();
-                const value = this.getByKey(key);
+                const key = currentKey.toString()
+                const value = this.getByKey(key)
 
                 if (value !== undefined && value !== null) {
-                    accumulator[key] = value;
+                    accumulator[key] = value
                 }
 
-                return accumulator;
-            }, {});
+                return accumulator
+            }, {})
 
             if (Object.keys(result).length < 1) {
-                return defaultValue;
+                return defaultValue
             }
 
-            return result;
+            return result
         }
 
         /**
@@ -362,7 +362,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {boolean}
          */
         originalHas(key) {
-            return key in this.original;
+            return key in this.original
         }
 
         /**
@@ -371,7 +371,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {boolean}
          */
         has(key) {
-            return key in this.flatObject;
+            return key in this.flatObject
         }
 
         /**
@@ -382,7 +382,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         includes(key) {
             return (
                 this.keys().filter((item) => item.startsWith(key)).length > 0
-            );
+            )
         }
 
         /**
@@ -395,9 +395,9 @@ const ObjectGenerator = ({ schema } = {}) =>
             return Object.fromEntries(
                 Object.entries(this.original).map(([key, value]) => [
                     key,
-                    callbackFunction(value, key, this.original),
+                    callbackFunction(value, key, this.original)
                 ])
-            );
+            )
         }
 
         /**
@@ -412,7 +412,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                     ([key, value]) =>
                         key && callbackFunction(value, key, this.original)
                 )
-            );
+            )
         }
 
         /**
@@ -425,7 +425,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         every(callbackFunction) {
             return Object.values(this.original).every((value) =>
                 callbackFunction(value)
-            );
+            )
         }
 
         /**
@@ -440,7 +440,7 @@ const ObjectGenerator = ({ schema } = {}) =>
         some(callbackFunction) {
             return Object.values(this.original).some((value) =>
                 callbackFunction(value)
-            );
+            )
         }
 
         /**
@@ -453,9 +453,9 @@ const ObjectGenerator = ({ schema } = {}) =>
             return Object.fromEntries(
                 this.entries().map(([entryKey, entryValue]) => [
                     entryKey,
-                    callbackFunction(entryValue),
+                    callbackFunction(entryValue)
                 ])
-            );
+            )
         }
 
         /**
@@ -469,7 +469,7 @@ const ObjectGenerator = ({ schema } = {}) =>
                 this.entries().filter(
                     ([key, value]) => key && callbackFunction(value)
                 )
-            );
+            )
         }
 
         /**
@@ -480,7 +480,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {boolean}
          */
         flatEvery(callbackFunction) {
-            return this.values().every((value) => callbackFunction(value));
+            return this.values().every((value) => callbackFunction(value))
         }
 
         /**
@@ -493,11 +493,11 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {boolean}
          */
         flatSome(callbackFunction) {
-            return this.values().some((value) => callbackFunction(value));
+            return this.values().some((value) => callbackFunction(value))
         }
 
         static create(data) {
-            const obj = new Obj(data);
+            const obj = new Obj(data)
 
             return Object.setPrototypeOf(data, {
                 ...Object.getPrototypeOf(data),
@@ -525,8 +525,8 @@ const ObjectGenerator = ({ schema } = {}) =>
                 flatEvery: (callbackFunction) =>
                     obj.flatEvery(callbackFunction),
                 some: (callbackFunction) => obj.some(callbackFunction),
-                flatSome: (callbackFunction) => obj.flatSome(callbackFunction),
-            });
+                flatSome: (callbackFunction) => obj.flatSome(callbackFunction)
+            })
         }
 
         /**
@@ -535,7 +535,7 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {Array}
          */
         static createAll(data) {
-            return data.map((item) => Obj.create(item));
+            return data.map((item) => Obj.create(item))
         }
 
         /**
@@ -546,17 +546,17 @@ const ObjectGenerator = ({ schema } = {}) =>
          */
         static parse(data, options = {}) {
             const ParseOptions = ObjectGenerator({
-                schema: ParseOptionsSchema,
-            });
-            const parseOptions = ParseOptions.create(options);
-            const parser = new Parser({ schema });
-            const parsed = parser.parseObject(data);
+                schema: ParseOptionsSchema
+            })
+            const parseOptions = ParseOptions.create(options)
+            const parser = new Parser({ schema })
+            const parsed = parser.parseObject(data)
 
             if (parseOptions?.validate) {
-                return Obj.create(parsed);
+                return Obj.create(parsed)
             }
 
-            return parsed;
+            return parsed
         }
 
         /**
@@ -565,8 +565,8 @@ const ObjectGenerator = ({ schema } = {}) =>
          * @returns {Array}
          */
         static parseAll(data) {
-            return data.map((item) => Obj.parse(item));
+            return data.map((item) => Obj.parse(item))
         }
-    };
+    }
 
-export { ObjectGenerator as Obj, Parser, Int };
+export { ObjectGenerator as Obj, Parser, Int }

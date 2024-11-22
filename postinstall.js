@@ -1,1 +1,1 @@
-console.log('Thanks for using my package! π★-s');
+console.log('Thanks for using my package! π★-s')
