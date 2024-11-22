@@ -1,4 +1,4 @@
- 
+
 import test from 'node:test'
 import assert from 'node:assert'
 import Int from '../int.js'
@@ -16,7 +16,7 @@ test('Test int.js', async (t) => {
         try {
             new Int(42.42)
         } catch (error) {
-            assert.strictEqual(error.message, '42.42 isnt an integer')
+            assert.strictEqual(error.message, '42.42 isn\'t an integer')
         }
     })
 })
