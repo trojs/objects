@@ -1,7 +1,7 @@
 {
     "name": "@trojs/objects",
     "description": "Create valid JavaScript objects",
-    "version": "9.0.0",
+    "version": "9.0.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
@@ -56,7 +56,7 @@
         "flat"
     ],
     "dependencies": {
-        "@trojs/error": "^3.0.0",
+        "@trojs/error": "^4.0.0",
         "@trojs/validator": "^11.0.0"
     },
     "funding": {
