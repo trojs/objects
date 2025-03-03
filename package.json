@@ -11,7 +11,7 @@
         "lint": "eslint",
         "lint:report": "eslint src/*.js -f json -o report.json",
         "lint:fix": "eslint --fix",
-        "test": "c8 node --test src/__tests__/*.js",
+        "test": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --production",
         "postinstall": "node postinstall.js"
@@ -28,21 +28,10 @@
     "source": "src/objects.js",
     "module": "src/objects.js",
     "devDependencies": {
-        "@eslint/js": "^9.15.0",
-        "@stylistic/eslint-plugin": "^4.0.0",
-        "@stylistic/eslint-plugin-js": "^4.0.0",
-        "c8": "^10.0.0",
+        "@trojs/lint": "^0.2.9",
         "eslint": "^9.15.0",
-        "eslint-config-prettier": "^10.0.0",
-        "eslint-plugin-import": "^2.31.0",
-        "eslint-plugin-jsdoc": "^50.5.0",
-        "eslint-plugin-n": "^17.14.0",
-        "eslint-plugin-prettier": "^5.2.1",
-        "eslint-plugin-promise": "^7.1.0",
-        "eslint-plugin-sonarjs": "^2.0.4",
         "globals": "^16.0.0",
-        "jscpd": "^4.0.0",
-        "prettier": "^3.0.0"
+        "jscpd": "^4.0.5"
     },
     "repository": {
         "type": "git",
