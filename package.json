@@ -46,7 +46,7 @@
     ],
     "dependencies": {
         "@trojs/error": "^5.0.0",
-        "@trojs/validator": "^11.0.0"
+        "@trojs/validator": "^12.0.0"
     },
     "funding": {
         "type": "github",
