@@ -1,7 +1,7 @@
 {
     "name": "@trojs/objects",
     "description": "Create valid JavaScript objects",
-    "version": "9.0.10",
+    "version": "9.0.11",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
