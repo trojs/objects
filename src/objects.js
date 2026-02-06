@@ -155,7 +155,7 @@ const ObjectGenerator = ({ schema } = {}) =>
       }
 
       const subTypeName
-                = subType?.constructor === String ? subType : subType.name
+        = subType?.constructor === String ? subType : subType.name
 
       throw new ValidationError({
         message: `The field ${path}.${subField} should be a ${subTypeName} (${invalidData})`,
