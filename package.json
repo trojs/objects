@@ -29,7 +29,7 @@
     "module": "src/objects.js",
     "devDependencies": {
         "@trojs/lint": "^0.4.0",
-        "eslint": "^9.15.0",
+        "eslint": "^10.0.0",
         "globals": "^17.0.0",
         "jscpd": "^4.0.5"
     },
