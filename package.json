@@ -31,7 +31,7 @@
         "@trojs/lint": "^0.4.0",
         "eslint": "^10.0.0",
         "globals": "^17.0.0",
-        "jscpd": "^4.0.5"
+        "jscpd": "^5.0.0"
     },
     "repository": {
         "type": "git",
